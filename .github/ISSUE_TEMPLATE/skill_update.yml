@@ -1,0 +1,36 @@
+name: Skill Documentation Update
+description: Report an issue, correction, or update for an existing skill README or metadata
+title: "[Skill Update]: <Skill Name> - <Short Summary>"
+labels: ["documentation", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to report corrections, outdated information, or improvements for an existing skill documentation page.
+
+  - type: input
+    id: skill_path
+    attributes:
+      label: Affected Skill Path
+      description: Enter the path to the skill directory (e.g. skills/memory/graphiti/).
+      placeholder: e.g., skills/memory/graphiti/
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue_description
+    attributes:
+      label: Description of Issue / Update
+      description: Describe what is incorrect, missing, or needs updating.
+      placeholder: Detail the outdated commands, broken links, or inaccurate explanations...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_change
+    attributes:
+      label: Proposed Fix / Change
+      description: Describe how the documentation should be updated.
+      placeholder: Provide corrected text, updated config code, or revised links...
+    validations:
+      required: false

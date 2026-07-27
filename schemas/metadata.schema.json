@@ -1,0 +1,144 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ai-skills-library.org/schemas/metadata.schema.json",
+  "title": "AI Skill Metadata Schema",
+  "description": "Machine-readable schema validating metadata.json for skills in AI-Skills-Library.",
+  "type": "object",
+  "required": [
+    "name",
+    "slug",
+    "description",
+    "category",
+    "tags",
+    "difficulty",
+    "license",
+    "official",
+    "official_repository",
+    "supported_models",
+    "supported_platforms",
+    "supported_ides",
+    "version",
+    "status",
+    "maintainer",
+    "last_updated"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Human-readable skill name.",
+      "examples": ["Graphiti"]
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Lowercase hyphenated directory slug matching folder name.",
+      "examples": ["graphiti"]
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "Concise single-sentence summary for search, indexers, and AI tools."
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "memory",
+        "context",
+        "prompt-engineering",
+        "mcp",
+        "automation",
+        "planning",
+        "reasoning",
+        "developer-tools",
+        "repository-intelligence",
+        "security",
+        "testing",
+        "evaluation",
+        "observability",
+        "agent-frameworks",
+        "ai-ides",
+        "productivity",
+        "code-generation"
+      ],
+      "description": "Parent category matching directory under skills/."
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true,
+      "description": "Search and classification tags."
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": ["Beginner", "Intermediate", "Advanced"],
+      "description": "Estimated learning and integration difficulty level."
+    },
+    "license": {
+      "type": "string",
+      "description": "License identifier (e.g. MIT, Apache-2.0)."
+    },
+    "official": {
+      "type": "boolean",
+      "description": "True if maintained by the official product authors."
+    },
+    "official_repository": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to the primary source repository."
+    },
+    "official_documentation": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to official project documentation if separate."
+    },
+    "supported_models": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true,
+      "description": "AI models verified to work with this skill."
+    },
+    "supported_platforms": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true,
+      "description": "Operating systems or runtime platforms supported."
+    },
+    "supported_ides": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true,
+      "description": "IDE integrations supported (Cursor, Claude Code, Windsurf, VS Code)."
+    },
+    "related_skills": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true,
+      "description": "Slugs of complementary or related skills."
+    },
+    "keywords": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true,
+      "description": "Indexing keywords for semantic search and CLI search."
+    },
+    "version": {
+      "type": "string",
+      "description": "Documentation version of this skill package."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["Active", "Maintained", "Deprecated", "Experimental"],
+      "description": "Maintenance and stability status."
+    },
+    "maintainer": {
+      "type": "string",
+      "description": "Maintainer or organization responsible for this skill doc."
+    },
+    "last_updated": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "description": "ISO 8601 date of last update (YYYY-MM-DD)."
+    }
+  }
+}

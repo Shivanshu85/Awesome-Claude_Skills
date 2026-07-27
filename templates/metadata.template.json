@@ -1,0 +1,21 @@
+{
+  "name": "Skill Name Starter",
+  "slug": "skill-name-starter",
+  "description": "Concise single-sentence summary for search, indexers, and AI tools.",
+  "category": "memory",
+  "tags": ["tag1", "tag2", "tag3"],
+  "difficulty": "Intermediate",
+  "license": "MIT",
+  "official": true,
+  "official_repository": "https://github.com/example/skill-repo",
+  "official_documentation": "https://docs.example.com/skill",
+  "supported_models": ["Claude 3.5 Sonnet", "GPT-4o", "Gemini 1.5 Pro"],
+  "supported_platforms": ["macOS", "Linux", "Windows"],
+  "supported_ides": ["Cursor", "Claude Code", "Windsurf"],
+  "related_skills": ["related-skill-1", "related-skill-2"],
+  "keywords": ["keyword1", "keyword2", "keyword3"],
+  "version": "1.0.0",
+  "status": "Active",
+  "maintainer": "AI-Skills-Library Team",
+  "last_updated": "2026-07-27"
+}

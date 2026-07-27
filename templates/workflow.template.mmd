@@ -1,0 +1,41 @@
+graph TD
+    %% Input Layer
+    subgraph Input ["1. Input Layer"]
+        Req["User Developer Request"]
+        Ctx["Context & Repository State"]
+    end
+
+    %% Processing Engine
+    subgraph Processing ["2. Processing Engine"]
+        Parser["Request Parser & Tokenizer"]
+        Router["Skill Action Router"]
+    end
+
+    %% Core Components
+    subgraph Core ["3. Core Components"]
+        Engine["Core Logic Engine"]
+        MemoryStore["Memory / Vector Store"]
+        ExternalTool["External MCP / Tool Interface"]
+    end
+
+    %% Output Handler
+    subgraph Output ["4. Output Handler"]
+        Formatter["Response Formatter"]
+        Validator["Validation & Guardrails"]
+    end
+
+    %% Final Result
+    subgraph Result ["5. Final Result"]
+        FinalOutput["Verified AI Coding Artifact"]
+    end
+
+    %% Flow Connections
+    Req --> Parser
+    Ctx --> Parser
+    Parser --> Router
+    Router --> Engine
+    Engine <--> MemoryStore
+    Engine <--> ExternalTool
+    Engine --> Formatter
+    Formatter --> Validator
+    Validator --> FinalOutput

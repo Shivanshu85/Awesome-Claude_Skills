@@ -1,0 +1,71 @@
+name: New Skill Request
+description: Propose adding a new AI Coding Skill to the library
+title: "[Skill Proposal]: <Skill Name>"
+labels: ["skill-proposal", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for proposing a new AI Coding Skill! Please fill out the form below to help us evaluate the request.
+
+  - type: input
+    id: skill_name
+    attributes:
+      label: Skill Name
+      description: The official name of the skill or technology (e.g. Graphiti, Mem0, Repomix, MCP GitHub Server).
+      placeholder: e.g., Graphiti
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Target Category
+      description: Select the category that best fits this skill according to docs/taxonomy.md.
+      options:
+        - Memory
+        - Context
+        - Prompt Engineering
+        - MCP
+        - Automation
+        - Planning
+        - Reasoning
+        - Developer Tools
+        - Repository Intelligence
+        - Security
+        - Testing
+        - Evaluation
+        - Observability
+        - Agent Frameworks
+        - AI IDEs
+        - Productivity
+        - Code Generation
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Skill Description
+      description: Provide a concise summary of what this skill does and why it is valuable.
+      placeholder: Describe the skill, core features, and primary developer benefits...
+    validations:
+      required: true
+
+  - type: input
+    id: official_repo
+    attributes:
+      label: Official Repository URL
+      description: Link to the primary official GitHub repository or documentation site.
+      placeholder: https://github.com/...
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_cases
+    attributes:
+      label: Primary Use Cases
+      description: When should developers or AI agents use this skill?
+      placeholder: Describe key scenarios where this skill provides significant value...
+    validations:
+      required: true

@@ -1,0 +1,45 @@
+# Hybrid Licensing Strategy
+
+The **AI-Skills-Library** project uses a dual licensing model to optimize for open knowledge sharing while maximizing developer reusability of tooling and automation assets.
+
+---
+
+## 1. Documentation & Content License
+
+All written documentation, Markdown guides, category landing pages, architectural diagrams, PDF exports, and taxonomy files are licensed under the **Creative Commons Attribution 4.0 International License (CC BY 4.0)**.
+
+- **Full License Text**: [LICENSES/CC-BY-4.0.txt](file:///LICENSES/CC-BY-4.0.txt)
+- **Scope**:
+  - `README.md` (root and skill-level)
+  - `skills/**/*.md`
+  - `docs/**/*.md`
+  - `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `CHANGELOG.md`
+  - Diagram files (`*.mmd`, `*.svg`) and PDF exports (`*.pdf`)
+
+Under CC BY 4.0, you are free to share, adapt, and build upon these materials for any purpose (including commercial), provided appropriate credit is given to the AI-Skills-Library contributors.
+
+---
+
+## 2. Schemas, Templates & Tooling License
+
+All reusable code assets, JSON Schemas, automation templates, workflows, and developer scripts are licensed under the **MIT License**.
+
+- **Full License Text**: [LICENSES/MIT.txt](file:///LICENSES/MIT.txt)
+- **Scope**:
+  - `schemas/**/*.json`
+  - `templates/**/*`
+  - `.github/**/*`
+  - Any build scripts, linters, or CLI utilities within the repository
+
+---
+
+## Summary Table
+
+| Repository Path / Asset Type | Applicable License | Text Location |
+| :--- | :--- | :--- |
+| Documentation (`README.md`, `skills/`, `docs/`) | **CC BY 4.0** | [LICENSES/CC-BY-4.0.txt](file:///LICENSES/CC-BY-4.0.txt) |
+| Schemas (`schemas/metadata.schema.json`) | **MIT** | [LICENSES/MIT.txt](file:///LICENSES/MIT.txt) |
+| Templates (`templates/*`) | **MIT** | [LICENSES/MIT.txt](file:///LICENSES/MIT.txt) |
+| Automation & Workflows (`.github/`) | **MIT** | [LICENSES/MIT.txt](file:///LICENSES/MIT.txt) |
+
+For questions regarding licensing or commercial integrations, please refer to [CONTRIBUTING.md](file:///CONTRIBUTING.md).
