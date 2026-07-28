@@ -1,6 +1,6 @@
 # Category Taxonomy & Scope Guide
 
-This document defines the official domain taxonomy for **AI-Skills-Library**. Every skill contributed to the repository must be placed into exactly one primary category folder under `skills/`.
+This document defines the official domain taxonomy for **Awesome-Claude_Skills**. Every skill contributed to the repository must be placed into exactly one primary category folder under `skills/`.
 
 Categorization is based on **functional capability and architectural role** within AI coding workflows, never by vendor name or arbitrary numbering.
 

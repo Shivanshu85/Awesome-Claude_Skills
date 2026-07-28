@@ -1,6 +1,6 @@
 # Documentation & Writing Standards Guide
 
-This guide establishes the mandatory formatting, writing, architectural, and structural standards for all documentation in **AI-Skills-Library**.
+This guide establishes the mandatory formatting, writing, architectural, and structural standards for all documentation in **Awesome-Claude_Skills**.
 
 Consistency is paramount. Every skill README, category guide, and template must adhere to these specifications.
 

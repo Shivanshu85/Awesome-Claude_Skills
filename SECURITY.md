@@ -1,6 +1,6 @@
 # Security Policy & Vulnerability Disclosure
 
-**AI-Skills-Library** takes the security and safety of AI systems, prompt engineering patterns, Model Context Protocol (MCP) integrations, and developer environments seriously.
+**Awesome-Claude_Skills** takes the security and safety of AI systems, prompt engineering patterns, Model Context Protocol (MCP) integrations, and developer environments seriously.
 
 ---
 
@@ -22,7 +22,7 @@ If you discover a security vulnerability, security flaw in documented MCP server
 
 ### Reporting Process
 
-1. Email security disclosure reports to the maintainers at `security@ai-skills-library.org` (or submit a private security advisory on GitHub).
+1. Email security disclosure reports to the maintainers at `security@awesome-claude-skills.org` (or submit a private security advisory on GitHub).
 2. Include the following details:
    - Affected skill path (e.g., `skills/mcp/github/`)
    - Description of the security risk or vulnerability

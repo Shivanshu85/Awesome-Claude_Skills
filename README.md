@@ -1,10 +1,16 @@
-# AI-Skills-Library
+<p align="center">
+  <img src="assets/banner.png" alt="Awesome-Claude_Skills Banner" width="100%" />
+</p>
 
-[![License: CC BY 4.0](https://img.shields.io/badge/Docs_License-CC_BY_4.0-blue.svg)](file:///LICENSE)
-[![License: MIT](https://img.shields.io/badge/Tools_License-MIT-yellow.svg)](file:///LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](file:///CONTRIBUTING.md)
-[![Schema Version](https://img.shields.io/badge/Schema-Draft_07-informational.svg)](file:///schemas/metadata.schema.json)
-[![Documentation Standard](https://img.shields.io/badge/Standard-v1.0-purple.svg)](file:///docs/standards.md)
+<h1 align="center">Awesome-Claude_Skills</h1>
+
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/Docs_License-CC_BY_4.0-blue.svg" alt="License: CC BY 4.0"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/Tools_License-MIT-yellow.svg" alt="License: MIT"></a>
+  <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a>
+  <a href="schemas/metadata.schema.json"><img src="https://img.shields.io/badge/Schema-Draft_07-informational.svg" alt="Schema Version"></a>
+  <a href="docs/standards.md"><img src="https://img.shields.io/badge/Standard-v1.0-purple.svg" alt="Documentation Standard"></a>
+</p>
 
 > The canonical, production-grade documentation library for AI Coding Skills across every AI coding ecosystem.
 
@@ -27,7 +33,7 @@
 
 ## Overview & Mission
 
-**AI-Skills-Library** is a curated, vendor-neutral knowledge base that documents AI Coding Skills in a standard, predictable, and maintainable format. 
+**Awesome-Claude_Skills** is a curated, vendor-neutral knowledge base that documents AI Coding Skills in a standard, predictable, and maintainable format. 
 
 As AI coding assistants, agents, and IDE integrations evolve, developers require an authoritative reference to understand **how to structure memory, handle context windows, design prompt systems, implement MCP servers, and orchestrate agent workflows**.
 
@@ -52,7 +58,7 @@ Designed with standards used by open-source foundations (OpenAI Cookbook, MDN, K
 ## Visual Architecture Map
 
 ```
-AI-Skills-Library/
+Awesome-Claude_Skills/
 │
 ├── README.md                          <- Root Landing Page & Central Index
 ├── LICENSE                            <- Dual Licensing Guide (CC BY 4.0 + MIT)

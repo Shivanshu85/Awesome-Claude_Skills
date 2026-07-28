@@ -1,6 +1,6 @@
-# Contributing to AI-Skills-Library
+# Contributing to Awesome-Claude_Skills
 
-Thank you for your interest in contributing to **AI-Skills-Library**! This repository is designed to be the canonical documentation library for AI Coding Skills across all AI models, IDEs, and frameworks.
+Thank you for your interest in contributing to **Awesome-Claude_Skills**! This repository is designed to be the canonical documentation library for AI Coding Skills across all AI models, IDEs, and frameworks.
 
 To maintain professional quality and long-term sustainability as we scale to thousands of skills, every contribution must adhere strictly to these guidelines.
 

@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://ai-skills-library.org/schemas/metadata.schema.json",
+  "$id": "https://awesome-claude-skills.org/schemas/metadata.schema.json",
   "title": "AI Skill Metadata Schema",
-  "description": "Machine-readable schema validating metadata.json for skills in AI-Skills-Library.",
+  "description": "Machine-readable schema validating metadata.json for skills in Awesome-Claude_Skills.",
   "type": "object",
   "required": [
     "name",

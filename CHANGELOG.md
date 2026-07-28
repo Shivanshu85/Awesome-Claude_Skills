@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the **AI-Skills-Library** project will be documented in this file.
+All notable changes to the **Awesome-Claude_Skills** project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to Semantic Versioning where applicable to schemas and standards.
@@ -10,7 +10,7 @@ and this project adheres to Semantic Versioning where applicable to schemas and 
 ## [1.0.0] - 2026-07-27
 
 ### Added
-- Initialized production-ready GitHub repository skeleton for **AI-Skills-Library**.
+- Initialized production-ready GitHub repository skeleton for **Awesome-Claude_Skills**.
 - Created root landing page `README.md` with visual repository architecture map and category matrix.
 - Established hybrid licensing model (`LICENSES/CC-BY-4.0.txt` for documentation, `LICENSES/MIT.txt` for schemas, templates, and tooling).
 - Added core documentation infrastructure:

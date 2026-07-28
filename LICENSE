@@ -1,6 +1,6 @@
 # Hybrid Licensing Strategy
 
-The **AI-Skills-Library** project uses a dual licensing model to optimize for open knowledge sharing while maximizing developer reusability of tooling and automation assets.
+The **Awesome-Claude_Skills** project uses a dual licensing model to optimize for open knowledge sharing while maximizing developer reusability of tooling and automation assets.
 
 ---
 
@@ -16,7 +16,7 @@ All written documentation, Markdown guides, category landing pages, architectura
   - `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `CHANGELOG.md`
   - Diagram files (`*.mmd`, `*.svg`) and PDF exports (`*.pdf`)
 
-Under CC BY 4.0, you are free to share, adapt, and build upon these materials for any purpose (including commercial), provided appropriate credit is given to the AI-Skills-Library contributors.
+Under CC BY 4.0, you are free to share, adapt, and build upon these materials for any purpose (including commercial), provided appropriate credit is given to the Awesome-Claude_Skills contributors.
 
 ---
 
