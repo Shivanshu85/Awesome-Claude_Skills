@@ -1,154 +1,170 @@
 # Contributing to Awesome-Claude_Skills
 
-Thank you for your interest in contributing to **Awesome-Claude_Skills**! This repository is designed to be the canonical documentation library for AI Coding Skills across all AI models, IDEs, and frameworks.
+Thank you for your interest in contributing to **Awesome-Claude_Skills**! This repository is designed to be the world's premier, canonical documentation library for open-source AI context optimization, token economy, memory systems, MCP servers, prompt engineering, and developer productivity tools.
 
-To maintain professional quality and long-term sustainability as we scale to thousands of skills, every contribution must adhere strictly to these guidelines.
+To maintain professional quality, long-term sustainability, and technical accuracy, every contribution must adhere strictly to these guidelines.
 
 ---
 
 ## Table of Contents
 
-- [Repository Philosophy](#repository-philosophy)
-- [How to Add a New Skill](#how-to-add-a-new-skill)
+- [Repository Philosophy & Rules](#repository-philosophy--rules)
+- [What Can Be Contributed](#what-can-be-contributed)
 - [Folder & Slug Naming Rules](#folder--slug-naming-rules)
-- [Documentation Standards](#documentation-standards)
-- [Metadata Rules & Schema Validation](#metadata-rules--schema-validation)
-- [Workflow Diagram Rules](#workflow-diagram-rules)
-- [Pull Request Checklist](#pull-request-checklist)
+- [The 7-File Tool Specification](#the-7-file-tool-specification)
+- [28-Section README Template Rules](#28-section-readme-template-rules)
+- [Metadata Schema & Validation](#metadata-schema--validation)
+- [Mermaid Diagram Guidelines](#mermaid-diagram-guidelines)
+- [Writing Style & Content Guidelines](#writing-style--content-guidelines)
+- [Pull Request Submission Checklist](#pull-request-submission-checklist)
 - [Code of Conduct](#code-of-conduct)
 
 ---
 
-## Repository Philosophy
+## Repository Philosophy & Rules
 
-Before contributing, keep our core principles in mind:
-
-1. **Documentation-First**: We document AI skills; we do not write software implementations or tutorials here.
-2. **Single Source of Truth**: All narrative information belongs inside a skill's single `README.md`. Never split content into separate `installation.md` or `troubleshooting.md` files.
-3. **Derived PDFs**: Do not create or edit PDFs manually. PDFs (`<SkillName>-Guide.pdf`) are compiled automatically from the master `README.md`.
-4. **Machine/Human Separation**: `README.md` is written for humans. `metadata.json` is written for machines (search, CLI, APIs, AI agents). Never copy narrative paragraphs into `metadata.json`.
-5. **No Speculation**: Use verifiable facts and official documentation links. Do not invent benchmark numbers or unverified claims.
+1. **Quality over Quantity**: We only document important, useful, trusted open-source tools.
+2. **Documentation First**: This is a documentation repository. Do not commit software source code, binaries, or random scripts.
+3. **Single Source of Truth**: The tool's `README.md` is the authoritative documentation source. Never create extra markdown files (e.g. `installation.md` or `benchmarks.md`).
+4. **No Duplicate Documentation**: Keep prose inside `README.md`. Keep `metadata.json` compact and machine-oriented.
+5. **Consistency over Creativity**: Every documented tool follows the exact same structure.
+6. **Evidence-Based Content**: Never invent benchmark scores, fake numbers, or marketing hype. Use official documentation and verifiable facts.
 
 ---
 
-## How to Add a New Skill
+## What Can Be Contributed
 
-Follow these steps to contribute a new skill:
+We welcome contributions for open-source tools, MCP servers, and protocols that directly improve:
 
-### Step 1: Check Taxonomy
-Review [docs/taxonomy.md](file:///docs/taxonomy.md) to identify the correct category for your skill (e.g., `memory`, `mcp`, `context`, `prompt-engineering`). If uncertain, open a [New Skill Request Issue](file:///.github/ISSUE_TEMPLATE/new_skill_request.yml).
+- **Memory Systems**: Persistent agent state, knowledge graph RAG, entity memory.
+- **Context Management**: Context windows, packing, injection, dynamic windowing.
+- **Context Compression**: LLMLingua, prompt compression, token pruning.
+- **Token Optimization**: Cost reduction, whitespace pruning, input economy.
+- **Prompt Engineering**: System prompt frameworks, guardrails, structured outputs.
+- **Codebase Intelligence**: AST parsing, repository packing, symbol graph search.
+- **MCP Servers**: Standardized Model Context Protocol servers for files, git, databases, and APIs.
+- **Developer Productivity**: Developer workflow acceleration, CLI companions, IDE bindings.
+- **Agent Workflows**: Sequential thinking, planning, reflection, ReAct loops.
+- **Security**: Prompt injection defense, sandboxing, permission controls.
+- **Evaluation & Testing**: LLM evals, prompt regression suites, accuracy metrics.
+- **Observability**: Telemetry, span tracing, token usage analytics.
 
-### Step 2: Create Skill Folder
-Create a directory under the selected category:
-```bash
-skills/<category>/<skill-slug>/
-```
-Example: `skills/memory/graphiti/`
+### What Must NEVER Be Contributed
 
-### Step 3: Copy Templates
-Copy the starter templates from the `templates/` directory:
-- Copy `templates/README.template.md` to `skills/<category>/<skill-slug>/README.md`
-- Copy `templates/metadata.template.json` to `skills/<category>/<skill-slug>/metadata.json`
-- Copy `templates/workflow.template.mmd` to `skills/<category>/<skill-slug>/workflow.mmd`
-
-### Step 4: Populate Skill Files
-1. Fill out `README.md` following all 28 mandatory sections. Do not alter section names or order.
-2. Fill out `metadata.json` with machine keywords, tags, supported platforms, and URLs.
-3. Edit `workflow.mmd` to model the skill flow (`Input -> Processing -> Core Components -> Output -> Result`).
-
-### Step 5: Render Workflow SVG
-Compile `workflow.mmd` to `workflow.svg` using standard Mermaid tools (e.g., `@mermaid-js/mermaid-cli`).
-
-### Step 6: Validate Metadata
-Validate `metadata.json` against `schemas/metadata.schema.json` to ensure zero schema errors.
-
-### Step 7: Submit Pull Request
-Open a PR using [.github/PULL_REQUEST_TEMPLATE.md](file:///.github/PULL_REQUEST_TEMPLATE.md).
+Do **NOT** submit:
+- AI IDEs or generic agent frameworks
+- Closed-source / proprietary tools without open standards
+- Image generation, voice AI, or general chatbots
+- Fine-tuning libraries, raw datasets, or model weights
+- Unverified, subjective prompt lists without tooling
 
 ---
 
 ## Folder & Slug Naming Rules
 
-- **Lowercase Hyphenated**: Folder names must use lowercase alphanumeric characters separated by hyphens (kebab-case).
-  - ✅ `graphiti`
-  - ✅ `memory-bank`
-  - ✅ `github-mcp`
-  - ❌ `Graphiti_Skill` (no uppercase or underscores)
-  - ❌ `01-graphiti` (never use numeric prefixes)
-- **Self-Contained**: Every skill directory must contain exactly:
-  ```
-  skills/<category>/<skill-slug>/
-  ├── README.md
-  ├── metadata.json
-  ├── workflow.mmd
-  ├── workflow.svg
-  ├── <SkillName>-Guide.pdf  (compiled export)
-  └── LICENSE
-  ```
+Every tool must be located within one of the 13 canonical category directories under `skills/`:
+
+```
+skills/<category>/<tool-slug>/
+```
+
+- **Category Name**: Must match an existing category directory (e.g., `skills/memory/`, `skills/mcp/`).
+- **Tool Slug**: Must use lowercase `kebab-case` matching the tool name (e.g., `filesystem-mcp`, `graphiti`, `repomix`).
 
 ---
 
-## Documentation Standards
+## The 7-File Tool Specification
 
-All README files must strictly follow the section structure defined in [templates/README.template.md](file:///templates/README.template.md) and style rules in [docs/standards.md](file:///docs/standards.md):
+Every tool directory MUST contain EXACTLY these 7 files. No more, no less:
 
-- **Quick Facts Table**: Placed immediately after the `# <Skill Name>` title. Contains 13 standardized fields.
-- **Section Order**: Overview, Quick Facts, Problem Statement, Why this Skill Exists, When Should You Use It, When Should You NOT Use It, Key Features, Architecture Overview, Workflow Overview, Installation, Configuration, Supported Platforms, Supported AI Models, Supported IDEs, Usage (Basic & Advanced), Real-World Use Cases, Performance Notes, Comparison Table, Advantages, Limitations, Best Practices, Common Mistakes, Troubleshooting, Security Considerations, Related Skills, References, FAQ, License, Contributors.
-- **Glossary Linking**: Use definitions in [docs/glossary.md](file:///docs/glossary.md) for terms like RAG, MCP, Context Window, and Prompt Cache instead of redefining them locally.
-- **Tone**: Professional, clear, objective, and factual. Avoid marketing hype, excessive exclamation marks, or unnecessary emojis.
-
----
-
-## Metadata Rules & Schema Validation
-
-`metadata.json` powers search engines, CLI utilities, and AI indexing.
-
-- Must strictly adhere to `schemas/metadata.schema.json`.
-- `slug` must match the directory name.
-- `category` must match the parent folder name.
-- Keep description under 200 characters.
-- Do not repeat full paragraphs from `README.md`.
-
-Validate locally:
-```bash
-npx ajv-cli validate -s schemas/metadata.schema.json -d skills/<category>/<skill-slug>/metadata.json
+```
+skills/<category>/<tool-slug>/
+├── README.md              <- Canonical 28-section single source of truth
+├── metadata.json          <- Machine-readable metadata matching metadata.schema.json
+├── workflow.mmd           <- Source Mermaid diagram (Input -> Processing -> Output)
+├── workflow.svg           <- Rendered SVG diagram derived from workflow.mmd
+├── <ToolName>-Guide.pdf   <- Automatically compiled PDF derived from README.md
+└── LICENSE                <- Skill-level license file
 ```
 
 ---
 
-## Workflow Diagram Rules
+## 28-Section README Template Rules
 
-- Source file is `workflow.mmd`.
-- Diagram must use top-down (`TD`) layout.
-- Standard flow layout:
-  ```mermaid
-  graph TD
-      Input["Input Layer"] --> Processing["Processing Engine"]
-      Processing --> Core["Core Components"]
-      Core --> Output["Output Handler"]
-      Output --> Result["Final Result"]
-  ```
-- Keep node labels clear and concise.
-- Output SVG must be named `workflow.svg`.
+Every tool `README.md` must be created by copying `templates/README.template.md` and completing all 28 mandatory sections:
+
+1. **Overview**: High-level explanation of the tool and its significance.
+2. **Quick Facts**: Mandatory table summarizing Category, Primary Benefit, Difficulty, Works With, License, Official Repository, Maintenance Status, Last Updated, Learning Time, Setup Complexity, Token Saving Potential, Context Improvement, Memory Support.
+3. **Problem Solved**: Developer friction or technical bottleneck when this tool is NOT used.
+4. **Why Use It**: Design intent and technical architectural advantages.
+5. **When To Use**: Clear indicators when this tool is the right choice.
+6. **When NOT To Use**: Explicit anti-patterns and scenarios where the tool should be avoided.
+7. **Architecture Overview**: Deep-dive explanation of component interaction.
+8. **Workflow**: Step-by-step lifecycle flow from input to output.
+9. **Installation**: Exact package manager or CLI commands to install.
+10. **Configuration**: Environment variables, config files, or settings.
+11. **Compatibility Table**: Support status for Claude Code, Cursor, Codex, Gemini CLI, Continue, Roo Code, VS Code, and others.
+12. **Basic Example**: Clean, minimal copy-paste example.
+13. **Advanced Example**: Production-grade complex configuration example.
+14. **Use Cases**: Real-world software engineering workflows.
+15. **Performance Notes**: Token reduction impact, memory footprint, and speed notes.
+16. **Comparison Table**: Feature comparison against alternative tools.
+17. **Advantages**: List of key technical strengths.
+18. **Limitations**: Known constraints or trade-offs.
+19. **Best Practices**: Recommended engineering patterns.
+20. **Common Mistakes**: Misconfigurations to avoid.
+21. **Troubleshooting**: Diagnostic steps for common failure modes.
+22. **Security Considerations**: Sandboxing, permissions, data privacy, and secret handling.
+23. **Related Tools**: Links to complementary skills in the repository.
+24. **Official Repository**: Direct link to the open-source repository.
+25. **Official Documentation**: Direct link to official docs.
+26. **References**: Citations, papers, or official announcements.
+27. **FAQ**: Frequently asked questions.
+28. **License & Contributors**: Licensing details and contributor acknowledgments.
 
 ---
 
-## Pull Request Checklist
+## Metadata Schema & Validation
+
+`metadata.json` must validate cleanly against `schemas/metadata.schema.json`.
+
+- **Do Not Duplicate Narrative**: Keep descriptions concise.
+- **Required Fields**: `name`, `slug`, `description`, `category`, `tags`, `difficulty`, `license`, `official`, `official_repository`, `supported_models`, `supported_platforms`, `supported_ides`, `version`, `status`, `maintainer`, `last_updated`.
+- **Status Values**: Must be one of `"Active"`, `"Limited Maintenance"`, `"Archived"`.
+
+---
+
+## Mermaid Diagram Guidelines
+
+- `workflow.mmd` is the canonical source for architecture flowcharts.
+- Use clean `graph TD` or `sequenceDiagram` syntax.
+- Quote all node labels containing special characters: `id["Label (Details)"]`.
+- Compile `workflow.mmd` to vector graphic `workflow.svg`.
+
+---
+
+## Writing Style & Content Guidelines
+
+- **Technical & Neutral**: Write for senior developers and systems engineers. Avoid marketing jargon or hype words ("revolutionary", "game-changing").
+- **Evidence-Based**: Only document verified features. Never fabricate benchmark scores. Use qualitative ratings (Low, Medium, High, Very High) when empirical numbers are unavailable.
+- **Link Integrity**: Use relative Markdown links for all internal files: `[standards.md](file:///docs/standards.md)`.
+
+---
+
+## Pull Request Submission Checklist
 
 Before submitting a PR, verify:
 
-- [ ] Folder name follows kebab-case without numbers or special characters.
-- [ ] `README.md` contains all 28 required sections in exact order.
-- [ ] Quick Facts table is complete with all required properties.
-- [ ] Terms link to [docs/glossary.md](file:///docs/glossary.md) where appropriate.
-- [ ] `metadata.json` validates clean against `schemas/metadata.schema.json`.
-- [ ] `workflow.mmd` compiles cleanly to `workflow.svg`.
-- [ ] Navigation links (`← Previous Skill | Category Home | Next Skill →`) are correctly configured.
-- [ ] Category `README.md` is updated to index the new skill.
-- [ ] No extra or extraneous files are included in the skill folder.
+- [ ] Tool is placed in one of the 13 canonical categories under `skills/<category>/<tool-slug>/`.
+- [ ] Directory contains EXACTLY the 7 required files (`README.md`, `metadata.json`, `workflow.mmd`, `workflow.svg`, `Tool-Guide.pdf`, `LICENSE`).
+- [ ] `README.md` contains all 28 mandatory template sections.
+- [ ] `metadata.json` passes schema validation against `schemas/metadata.schema.json`.
+- [ ] All relative file links use the `file:///` format and point to valid files.
+- [ ] Qualitative impact ratings are used instead of invented benchmark scores.
+- [ ] PR description specifies the tool name, category, and official repository.
 
 ---
 
 ## Code of Conduct
 
-All contributors are expected to uphold our [CODE_OF_CONDUCT.md](file:///CODE_OF_CONDUCT.md). Please report unacceptable behavior to security or repository maintainers.
+All contributors are expected to uphold our [Code of Conduct](file:///CODE_OF_CONDUCT.md) (Contributor Covenant v2.1).

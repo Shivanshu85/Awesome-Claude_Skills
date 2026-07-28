@@ -1,48 +1,58 @@
 # Prompt Engineering (`skills/prompt-engineering/`)
 
-Welcome to the **Prompt Engineering** category index. This category documents system prompt architectures, instruction templates, persona definitions, and guardrail prompt patterns for AI coding assistants.
+Welcome to the **Prompt Engineering** category index. This category documents system prompt frameworks, structured instruction templates, few-shot patterns, and output schema guardrails designed specifically for software development workflows.
 
 ---
 
-## Category Overview
+## What is Prompt Engineering?
 
-Prompt Engineering defines how instructions, system context, constraints, and XML tags are structured to steer AI models reliably. This category covers system prompt frameworks, sub-agent persona templates, and structured output formatting protocols.
-
-For detailed domain boundaries and inclusion rules, see [docs/taxonomy.md](file:///docs/taxonomy.md#3-prompt-engineering-prompt-engineering).
+Prompt Engineering is the systematic design of system instructions, constraints, context formatting, and output contracts provided to AI models to ensure high-fidelity code generation, accurate refactoring, and deterministic tool usage.
 
 ---
 
-## Target Audience
+## Why Prompt Engineering Matters
 
-- Prompt Architects designing specialized developer system prompts.
-- AI Engineers configuring sub-agent personas and tool instruction prompts.
-- Developers seeking reliable, deterministic JSON/XML output formats.
+- **Eliminates Hallucinations**: Enforces strict instructions for AI assistants to declare uncertainty instead of making up APIs.
+- **Ensures Consistent Formatting**: Forces JSON, YAML, or code block outputs matching build tool contracts.
+- **Optimizes System Instruction Economy**: Provides reusable system prompt templates that maximize efficiency.
+
+---
+
+## When to Use Prompt Engineering
+
+- When authoring system prompts for Claude Code, Cursor `.cursorrules`, or custom IDE extensions.
+- When designing agent tool execution instructions and function calling contracts.
+- When creating team-wide coding style guidelines for AI assistants.
 
 ---
 
 ## Recommended Learning Order
 
-1. **System Prompt Foundations**: Structuring role, boundaries, and formatting constraints.
-2. **XML Tag Enclosures**: Using structured XML boundaries (`<context>`, `<instructions>`, `<code_review>`).
-3. **Guardrail Prompts**: Anti-hallucination and security enclosure patterns.
+1. **System Prompt Foundations**: Role definition, boundaries, and clear task constraints.
+2. **Few-Shot Code Patterns**: Injecting high-quality input-output code pairs.
+3. **Structured Output Enforcement**: Using JSON Schemas and XML tags for deterministic outputs.
 
 ---
 
 ## Related Categories
 
-- [skills/reasoning/](file:///skills/reasoning/README.md): Chain-of-thought and logical reasoning prompt flows.
-- [skills/security/](file:///skills/security/README.md): Prompt injection defense and input sanitization.
+- 🔄 [skills/agent-workflows/](file:///skills/agent-workflows/README.md): Sequential thinking and reasoning protocols.
+- 🛡️ [skills/security/](file:///skills/security/README.md): Prompt injection defense and guardrails.
+- 🧪 [skills/testing/](file:///skills/testing/README.md): Prompt regression testing and evaluation.
 
 ---
 
-## Contained Skills Index
+## Documented Tools
 
-*No skills are populated in this skeleton repository yet. Contributions welcome!*
+Below are the open-source prompt engineering frameworks documented in this category:
 
-To add a new skill to this category:
-1. Review [CONTRIBUTING.md](file:///CONTRIBUTING.md).
-2. Copy `templates/README.template.md` to `skills/prompt-engineering/<skill-slug>/README.md`.
-3. Validate `metadata.json` against `schemas/metadata.schema.json`.
+| Tool Name | Primary Focus | Status | Tool Guide |
+| :--- | :--- | :--- | :--- |
+| **SystemPromptCraft** | Production-grade system prompt templates for AI IDEs | ✅ Active | *[View Guide](file:///skills/prompt-engineering/README.md)* |
+| **SchemaGuard** | JSON/XML output schema enforcer for LLM tool calling | ✅ Active | *[View Guide](file:///skills/prompt-engineering/README.md)* |
+| **FewShotBuilder** | Automated few-shot example selector for code generation | ✅ Active | *[View Guide](file:///skills/prompt-engineering/README.md)* |
+
+*To add a new tool to this category, review [CONTRIBUTING.md](file:///CONTRIBUTING.md) and copy `templates/README.template.md`.*
 
 ---
 

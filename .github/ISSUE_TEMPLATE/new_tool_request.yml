@@ -1,0 +1,54 @@
+name: New Tool Documentation Request
+description: Propose documenting a new open-source AI optimization tool, MCP server, or memory framework.
+title: "[Tool Request]: "
+labels: ["tool-request", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting a new open-source tool for **Awesome-Claude_Skills**! Please ensure the tool directly improves AI efficiency, token economy, context management, memory, reasoning, or developer productivity.
+  - type: input
+    id: tool_name
+    attributes:
+      label: Tool Name
+      description: The official name of the open-source tool or MCP server.
+      placeholder: e.g. Repomix
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: Select the canonical category this tool belongs to.
+      options:
+        - memory
+        - context
+        - context-compression
+        - token-optimization
+        - prompt-engineering
+        - codebase-intelligence
+        - mcp
+        - developer-productivity
+        - agent-workflows
+        - security
+        - evaluation
+        - testing
+        - observability
+    validations:
+      required: true
+  - type: input
+    id: repository_url
+    attributes:
+      label: Official Open Source Repository URL
+      description: Link to the GitHub repository.
+      placeholder: https://github.com/org/repo
+    validations:
+      required: true
+  - type: textarea
+    id: benefit_summary
+    attributes:
+      label: Primary Benefit & Utility Summary
+      description: Explain how this tool reduces tokens, improves memory, optimizes context, or accelerates developer workflows.
+      placeholder: Provide technical details...
+    validations:
+      required: true

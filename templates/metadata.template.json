@@ -1,21 +1,29 @@
 {
-  "name": "Skill Name Starter",
-  "slug": "skill-name-starter",
-  "description": "Concise single-sentence summary for search, indexers, and AI tools.",
+  "name": "Tool Name Starter",
+  "slug": "tool-name-starter",
+  "description": "Concise single-sentence summary of the tool for machine indexers and AI search engines.",
   "category": "memory",
-  "tags": ["tag1", "tag2", "tag3"],
+  "tags": ["memory", "rag", "context"],
   "difficulty": "Intermediate",
   "license": "MIT",
   "official": true,
-  "official_repository": "https://github.com/example/skill-repo",
-  "official_documentation": "https://docs.example.com/skill",
+  "official_repository": "https://github.com/example/tool-repo",
+  "official_documentation": "https://docs.example.com/tool",
   "supported_models": ["Claude 3.5 Sonnet", "GPT-4o", "Gemini 1.5 Pro"],
   "supported_platforms": ["macOS", "Linux", "Windows"],
-  "supported_ides": ["Cursor", "Claude Code", "Windsurf"],
-  "related_skills": ["related-skill-1", "related-skill-2"],
+  "supported_ides": ["Claude Code", "Cursor", "Windsurf", "Roo Code", "Continue"],
+  "primary_benefit": "Token Reduction",
+  "impact_ratings": {
+    "token_saving": "High",
+    "context_quality": "Very High",
+    "developer_productivity": "High",
+    "reasoning_improvement": "Medium",
+    "setup_complexity": "Low"
+  },
+  "related_tools": ["related-tool-slug-1", "related-tool-slug-2"],
   "keywords": ["keyword1", "keyword2", "keyword3"],
   "version": "1.0.0",
   "status": "Active",
   "maintainer": "Awesome-Claude_Skills Team",
-  "last_updated": "2026-07-27"
+  "last_updated": "2026-07-28"
 }

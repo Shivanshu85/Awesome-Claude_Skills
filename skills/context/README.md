@@ -1,48 +1,57 @@
 # Context Management (`skills/context/`)
 
-Welcome to the **Context Management** category index. This category documents techniques, tools, and protocols for maximizing context window utility, token compression, and sliding context mechanisms.
+Welcome to the **Context Management** category index. This category documents tools and frameworks designed to optimize prompt context windows, assemble dynamic context payloads, and inject relevant documentation and code snippets into AI coding assistants.
 
 ---
 
-## Category Overview
+## What is Context Management?
 
-Context window space is a finite resource. Context Management skills focus on token pruning, prompt compression, sliding history windows, and context serialization to maximize model recall while minimizing token costs.
-
-For detailed domain boundaries and inclusion rules, see [docs/taxonomy.md](file:///docs/taxonomy.md#2-context-context-management).
+Context Management focuses on structuring, filtering, and assembling the information sent to an LLM prompt window. Instead of dumping arbitrary files into a prompt, context management tools select precisely the right files, documentation, and metadata needed for a specific coding task.
 
 ---
 
-## Target Audience
+## Why Context Management Matters
 
-- Developers optimizing token budgets in LLM API calls.
-- AI Engineers managing large context window limits in Cursor, Claude Code, or custom agent loops.
-- Authors of context-packing tools.
+- **Prevents Context Degradation**: Mitigates "lost in the middle" attention loss by keeping prompts clean and focused.
+- **Reduces Unnecessary Token Inflation**: Eliminates irrelevancies before they enter the model context.
+- **Improves Assistant Precision**: Ensures the model receives exact function signatures, dependency types, and active files.
+
+---
+
+## When to Use Context Management
+
+- When working with complex codebases where full file injection exceeds token limits.
+- When injecting external API documentation or library reference files dynamically into assistant context.
+- When optimizing context assembly for Cursor, Claude Code, or IDE plugins.
 
 ---
 
 ## Recommended Learning Order
 
-1. **Token Window Basics**: Understanding token counting, limits, and cost dynamics.
-2. **Context Pruning**: Strategies for dropping low-relevance conversation turns.
-3. **Semantic Compression**: AST and embedding-based context compression.
+1. **Context Assembly Basics**: Understanding token budgets and context window limits.
+2. **Dynamic Context Hydration**: Selective snippet and documentation injection.
+3. **Automated Window Packing**: Multi-file context prioritization algorithms.
 
 ---
 
 ## Related Categories
 
-- [skills/memory/](file:///skills/memory/README.md): Persistent multi-session memory systems.
-- [skills/repository-intelligence/](file:///skills/repository-intelligence/README.md): Bundling codebase files into context.
+- ⚡ [skills/context-compression/](file:///skills/context-compression/README.md): Prompt compression and token pruning.
+- 💰 [skills/token-optimization/](file:///skills/token-optimization/README.md): Token economy and input cost reduction.
+- 🔍 [skills/codebase-intelligence/](file:///skills/codebase-intelligence/README.md): Repository indexing and AST symbol graphs.
 
 ---
 
-## Contained Skills Index
+## Documented Tools
 
-*No skills are populated in this skeleton repository yet. Contributions welcome!*
+Below are the open-source context management tools documented in this category:
 
-To add a new skill to this category:
-1. Review [CONTRIBUTING.md](file:///CONTRIBUTING.md).
-2. Copy `templates/README.template.md` to `skills/context/<skill-slug>/README.md`.
-3. Validate `metadata.json` against `schemas/metadata.schema.json`.
+| Tool Name | Primary Focus | Status | Tool Guide |
+| :--- | :--- | :--- | :--- |
+| **Context7** | Dynamic context window assembler for live docs and code snippets | ✅ Active | *[View Guide](file:///skills/context/README.md)* |
+| **PromptPack** | Context payload bundler for multi-file IDE tasks | ✅ Active | *[View Guide](file:///skills/context/README.md)* |
+
+*To add a new tool to this category, review [CONTRIBUTING.md](file:///CONTRIBUTING.md) and copy `templates/README.template.md`.*
 
 ---
 

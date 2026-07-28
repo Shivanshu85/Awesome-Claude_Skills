@@ -1,66 +1,37 @@
-# Central AI Terminology Glossary
+# AI Optimization Glossary & Terminology Index
 
-To ensure single-source documentation and maintain consistency across all skill READMEs, core AI concepts and technical terminology are defined once in this central glossary.
-
-Skill documentation pages should link directly to entries in this file (e.g., `[RAG](file:///docs/glossary.md#rag)`) rather than repeating generic definitions locally.
+This glossary provides single-source definitions for core AI context optimization, token economy, memory, and protocol concepts used across **Awesome-Claude_Skills**.
 
 ---
 
-## Terms Index
-
-- [Agent](#agent)
-- [Context Window](#context-window)
-- [Prompt Cache](#prompt-cache)
-- [Embedding](#embedding)
-- [RAG (Retrieval-Augmented Generation)](#rag-retrieval-augmented-generation)
-- [MCP (Model Context Protocol)](#mcp-model-context-protocol)
-- [Semantic Search](#semantic-search)
-- [Knowledge Graph](#knowledge-graph)
-- [Planner](#planner)
-- [Reasoner](#reasoner)
-- [Tool Calling](#tool-calling)
-- [Context Compression](#context-compression)
-- [Memory](#memory)
-
----
-
-## Definitions
-
-### Agent
-An autonomous or semi-autonomous software loop driven by a Large Language Model (LLM) that can evaluate inputs, break down goals into sub-tasks, invoke external tools or APIs, inspect results, and iteratively solve problems without human intervention at every step.
+## Terminology Index
 
 ### Context Window
-The maximum token limit (including system instructions, conversation history, retrieved documents, tool outputs, and response budget) that an LLM can process within a single inference call.
+The maximum number of tokens (input prompt + output completion) an LLM can process in a single inference call. Optimizing context window usage prevents attention loss and token inflation.
 
-### Prompt Cache
-A hardware- or API-level optimization mechanism that stores pre-tokenized states of static prompt prefixes (such as system instructions or repository context), allowing faster inference latency and reduced token costs for repeated requests.
+### Model Context Protocol (MCP)
+An open specification that standardizes how AI models discover and execute local tools, inspect resources, and load system prompts. MCP replaces ad-hoc wrappers with standardized stdio and SSE transports.
 
-### Embedding
-A dense numerical vector representation of text, code, or media in a continuous high-dimensional space, engineered such that semantically similar concepts reside physically close to one another.
+### Prompt Compression
+The process of reducing input token count using rule-based pruning, AST parsing, or small language model (SLM) compression (e.g. LLMLingua) without altering the underlying semantic meaning of instructions.
 
-### RAG (Retrieval-Augmented Generation)
-An architecture that enhances LLM generation by retrieving relevant external facts, documentation, or code snippets from a database (vector, graph, or relational) and appending them into the model's context window prior to generating a response.
+### Retrieval-Augmented Generation (RAG)
+An architecture that retrieves relevant document or code snippets from an external knowledge base or vector database and injects them into the model's prompt context prior to generation.
 
-### MCP (Model Context Protocol)
-An open, standardized protocol developed to enable secure, bi-directional communication between AI applications (clients) and external data sources, tools, and prompts (servers) over standard transport layers (stdio, SSE).
+### Graph Memory
+A persistent memory architecture that stores entities, code concepts, and architectural relationships as nodes and edges in a temporal graph (e.g. Graphiti), allowing agents to retain long-term state across sessions.
 
-### Semantic Search
-A search technique that uses vector embeddings and distance metrics (e.g., cosine similarity) to retrieve documents based on their underlying meaning and intent, rather than matching exact keyword strings.
+### Sequential Thinking
+A multi-step reasoning protocol where an AI assistant dynamically formulates, tests, revises, and verifies hypotheses before generating code edits.
 
-### Knowledge Graph
-A structured graph database representing real-world entities (nodes) and their semantic relationships (edges), enabling complex multi-hop queries and contextual reasoning over interconnected domain data.
+### AST Parsing
+Abstract Syntax Tree parsing converts raw source code into a structured syntax tree, allowing AI tools to extract function signatures, interfaces, and import graphs while discarding formatting boilerplate.
 
-### Planner
-A dedicated LLM or prompt workflow responsible for analyzing a complex user request, decomposing it into an ordered Directed Acyclic Graph (DAG) of actionable sub-tasks, and defining verification criteria for each milestone.
+### Prompt Injection
+A security vulnerability where untrusted input text overrides system prompt instructions, forcing the LLM assistant to execute unauthorized actions or bypass safety guardrails.
 
-### Reasoner
-An LLM reasoning mode or structured prompt protocol (such as Chain-of-Thought or Tree-of-Thought) designed to systematically evaluate logical hypotheses, verify edge cases, and validate intermediate steps before outputting a final answer.
+### Prompt Caching
+A provider-level optimization (e.g., Anthropic Prompt Caching) that caches static prompt prefixes (like system prompts and codebase maps) to reduce latency and lower input token costs by up to 90%.
 
-### Tool Calling
-The capability of an LLM to recognize when an external function or API needs to be invoked, format a structured JSON call matching a predefined schema, and consume the tool's execution result back into its context window.
-
-### Context Compression
-The practice of reducing token count in prompt context through semantic summarization, AST filtering, prompt pruning, or embedding-based token selection while preserving crucial semantic information.
-
-### Memory
-The architectural subsystem responsible for storing, indexing, retrieving, and updating state information (such as user preferences, past decisions, conversation history, or codebase summaries) across multiple LLM interactions over time.
+### Token Economy
+The engineering discipline of minimizing input and output token consumption to reduce API expenses while maintaining maximum output quality and precision.

@@ -1,0 +1,21 @@
+name: Tool Documentation Update
+description: Report outdated information or request updates for an existing documented tool.
+title: "[Tool Update]: "
+labels: ["documentation", "update"]
+body:
+  - type: input
+    id: tool_path
+    attributes:
+      label: Tool Path
+      description: Relative path of the documented tool.
+      placeholder: e.g. skills/mcp/filesystem-mcp/
+    validations:
+      required: true
+  - type: textarea
+    id: update_description
+    attributes:
+      label: Description of Required Updates
+      description: Explain what sections require updates (e.g., new release features, configuration updates, broken links).
+      placeholder: Describe the changes needed...
+    validations:
+      required: true

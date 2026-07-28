@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://awesome-claude-skills.org/schemas/metadata.schema.json",
-  "title": "AI Skill Metadata Schema",
-  "description": "Machine-readable schema validating metadata.json for skills in Awesome-Claude_Skills.",
+  "title": "Awesome-Claude_Skills Metadata Schema",
+  "description": "Machine-readable schema validating metadata.json for documented tools in Awesome-Claude_Skills.",
   "type": "object",
   "required": [
     "name",
@@ -17,6 +17,8 @@
     "supported_models",
     "supported_platforms",
     "supported_ides",
+    "primary_benefit",
+    "impact_ratings",
     "version",
     "status",
     "maintainer",
@@ -26,119 +28,122 @@
   "properties": {
     "name": {
       "type": "string",
-      "description": "Human-readable skill name.",
-      "examples": ["Graphiti"]
+      "description": "Official name of the tool or protocol."
     },
     "slug": {
       "type": "string",
-      "pattern": "^[a-z0-9-]+$",
-      "description": "Lowercase hyphenated directory slug matching folder name.",
-      "examples": ["graphiti"]
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Lowercase kebab-case directory slug matching tool name."
     },
     "description": {
       "type": "string",
-      "maxLength": 200,
-      "description": "Concise single-sentence summary for search, indexers, and AI tools."
+      "maxLength": 280,
+      "description": "Concise single-sentence summary for search and AI indexing."
     },
     "category": {
       "type": "string",
       "enum": [
         "memory",
         "context",
+        "context-compression",
+        "token-optimization",
         "prompt-engineering",
+        "codebase-intelligence",
         "mcp",
-        "automation",
-        "planning",
-        "reasoning",
-        "developer-tools",
-        "repository-intelligence",
+        "developer-productivity",
+        "agent-workflows",
         "security",
-        "testing",
         "evaluation",
-        "observability",
-        "agent-frameworks",
-        "ai-ides",
-        "productivity",
-        "code-generation"
-      ],
-      "description": "Parent category matching directory under skills/."
+        "testing",
+        "observability"
+      ]
     },
     "tags": {
       "type": "array",
-      "items": { "type": "string" },
-      "uniqueItems": true,
-      "description": "Search and classification tags."
+      "items": { "type": "string" }
     },
     "difficulty": {
       "type": "string",
-      "enum": ["Beginner", "Intermediate", "Advanced"],
-      "description": "Estimated learning and integration difficulty level."
+      "enum": ["Beginner", "Intermediate", "Advanced"]
     },
     "license": {
-      "type": "string",
-      "description": "License identifier (e.g. MIT, Apache-2.0)."
+      "type": "string"
     },
     "official": {
-      "type": "boolean",
-      "description": "True if maintained by the official product authors."
+      "type": "boolean"
     },
     "official_repository": {
       "type": "string",
-      "format": "uri",
-      "description": "URL to the primary source repository."
+      "format": "uri"
     },
     "official_documentation": {
       "type": "string",
-      "format": "uri",
-      "description": "URL to official project documentation if separate."
+      "format": "uri"
     },
     "supported_models": {
       "type": "array",
-      "items": { "type": "string" },
-      "uniqueItems": true,
-      "description": "AI models verified to work with this skill."
+      "items": { "type": "string" }
     },
     "supported_platforms": {
       "type": "array",
-      "items": { "type": "string" },
-      "uniqueItems": true,
-      "description": "Operating systems or runtime platforms supported."
+      "items": { "type": "string" }
     },
     "supported_ides": {
       "type": "array",
-      "items": { "type": "string" },
-      "uniqueItems": true,
-      "description": "IDE integrations supported (Cursor, Claude Code, Windsurf, VS Code)."
+      "items": { "type": "string" }
     },
-    "related_skills": {
+    "primary_benefit": {
+      "type": "string",
+      "enum": [
+        "Token Reduction",
+        "Memory",
+        "Context Retrieval",
+        "Repository Analysis",
+        "Prompt Optimisation",
+        "MCP Integration",
+        "Workflow Optimisation",
+        "Security",
+        "Planning"
+      ]
+    },
+    "impact_ratings": {
+      "type": "object",
+      "required": [
+        "token_saving",
+        "context_quality",
+        "developer_productivity",
+        "reasoning_improvement",
+        "setup_complexity"
+      ],
+      "properties": {
+        "token_saving": { "type": "string", "enum": ["Low", "Medium", "High", "Very High", "N/A"] },
+        "context_quality": { "type": "string", "enum": ["Low", "Medium", "High", "Very High", "N/A"] },
+        "developer_productivity": { "type": "string", "enum": ["Low", "Medium", "High", "Very High", "N/A"] },
+        "reasoning_improvement": { "type": "string", "enum": ["Low", "Medium", "High", "Very High", "N/A"] },
+        "setup_complexity": { "type": "string", "enum": ["Low", "Medium", "High", "Very High", "N/A"] }
+      }
+    },
+    "related_tools": {
       "type": "array",
-      "items": { "type": "string" },
-      "uniqueItems": true,
-      "description": "Slugs of complementary or related skills."
+      "items": { "type": "string" }
     },
     "keywords": {
       "type": "array",
-      "items": { "type": "string" },
-      "uniqueItems": true,
-      "description": "Indexing keywords for semantic search and CLI search."
+      "items": { "type": "string" }
     },
     "version": {
-      "type": "string",
-      "description": "Documentation version of this skill package."
+      "type": "string"
     },
     "status": {
       "type": "string",
-      "enum": ["Active", "Maintained", "Deprecated", "Experimental"],
-      "description": "Maintenance and stability status."
+      "enum": ["Active", "Limited Maintenance", "Archived"]
     },
     "maintainer": {
-      "type": "string",
-      "description": "Maintainer or organization responsible for this skill doc."
+      "type": "string"
     },
     "last_updated": {
       "type": "string",
-      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
-      "description": "ISO 8601 date of last update (YYYY-MM-DD)."
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
     }
   }
 }
