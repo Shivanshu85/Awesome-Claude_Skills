@@ -20,53 +20,73 @@
 
 ## 📖 Overview
 
-**Awesome-Claude_Skills** is a documentation-first knowledge base dedicated to optimizing AI coding assistants, agents, and IDE integrations. Rather than acting as an arbitrary tool list or commercial directory, this repository provides standardized, vendor-neutral documentation for open-source AI optimization tools across 13 core domain categories.
-
----
-
-## 🎯 Mission
-
-> Build the world's best curated documentation library for AI context optimization, token economy, memory systems, Model Context Protocol (MCP) servers, prompt engineering, codebase intelligence, and developer productivity techniques that make AI coding assistants cheaper, faster, smarter, and more accurate.
-
-This repository exists to help developers, software engineers, AI engineers, and prompt engineers discover proven open-source solutions to:
-- Reduce token consumption and API costs
-- Improve context quality and long-context window handling
-- Implement persistent agent memory and knowledge graphs
-- Integrate standardized Model Context Protocol (MCP) servers
-- Enforce prompt security, evaluation, and regression testing
-
----
-
-## 💡 Philosophy
-
-This repository adheres to six core architectural principles:
-
-1. **Documentation-First**: This is a documentation repository, not a code library or file collector.
-2. **Single Source of Truth**: Every tool is documented in a single `README.md` file adhering to a strict 28-section standard.
-3. **Category Delegation**: Tool rankings, comparisons, GitHub star counts, maintenance statuses, and installation guides belong exclusively inside category `README.md` files and individual tool pages — not in the root landing page.
-4. **No Invented Tools**: Only existing, verified open-source projects are documented. Fake or placeholder tool entries are strictly forbidden.
-5. **Problem-First Navigation**: Navigation directs users to domain categories based on technical bottlenecks.
-6. **Evidence-Based Content**: Documentation relies on verifiable official documentation and technical facts rather than marketing claims.
+**Awesome-Claude_Skills** is a documentation-first repository containing curated open-source tools for AI coding optimization. It provides standardized, evidence-based documentation for Model Context Protocol (MCP) servers, persistent memory systems, prompt compression algorithms, codebase intelligence tools, and prompt engineering frameworks across all 13 canonical domain categories.
 
 ---
 
 ## 📚 Skills Library
 
-Explore open-source AI coding optimization tools across our 13 domain categories. Click any category to view its complete tool index, head-to-head comparisons, and learning guide:
+### 🧠 [Memory](skills/memory/)
 
-- 🧠 **[Memory](skills/memory/README.md)**: Persistent memory systems, temporal knowledge graphs, and multi-session RAG state retention.
-- 📦 **[Context](skills/context/README.md)**: Context window management, token payload packing, and dynamic documentation assembly.
-- ⚡ **[Context Compression](skills/context-compression/README.md)**: SLM-based prompt compression, token pruning algorithms, and context truncation.
-- 💰 **[Token Optimization](skills/token-optimization/README.md)**: Token economy, prompt whitespace/AST stripping, and API cost reduction techniques.
-- ✍️ **[Prompt Engineering](skills/prompt-engineering/README.md)**: System prompt frameworks, structured instruction templates, and output guardrails.
-- 🔍 **[Codebase Intelligence](skills/codebase-intelligence/README.md)**: Repository packing, AST parsing, symbol graph extraction, and codebase maps.
-- 🔌 **[Model Context Protocol (MCP)](skills/mcp/README.md)**: Standardized MCP servers for local files, git, APIs, web fetching, and reasoning.
-- 🚀 **[Developer Productivity](skills/developer-productivity/README.md)**: Developer workflow acceleration, CLI companions, and automation macros.
-- 🔄 **[Agent Workflows](skills/agent-workflows/README.md)**: Multi-step reasoning protocols, sequential thinking, reflection, and ReAct loops.
-- 🛡️ **[Security](skills/security/README.md)**: Prompt injection defense, MCP tool permission sandboxing, and secret scanning guardrails.
-- 📊 **[Evaluation](skills/evaluation/README.md)**: LLM quality benchmarks, prompt accuracy scoring, and evaluation pipelines.
-- 🧪 **[Testing](skills/testing/README.md)**: Prompt regression test suites, dynamic assertion libraries, and AI test automation.
-- 🔭 **[Observability](skills/observability/README.md)**: Assistant telemetry, token usage analytics, span tracing, and execution logging.
+
+
+---
+
+### 📦 [Context](skills/context/)
+
+
+---
+
+### ⚡ [Context Compression](skills/context-compression/)
+
+
+---
+
+### 💰 [Token Optimization](skills/token-optimization/)
+
+---
+
+### ✍️ [Prompt Engineering](skills/prompt-engineering/)
+
+
+---
+
+### 🔍 [Codebase Intelligence](skills/codebase-intelligence/)
+
+
+---
+
+### 🔌 [Model Context Protocol (MCP)](skills/mcp/)
+
+
+---
+
+### 🚀 [Developer Productivity](skills/developer-productivity/)
+
+---
+
+### 🔄 [Agent Workflows](skills/agent-workflows/)
+
+
+---
+
+### 🛡️ [Security](skills/security/)
+
+
+---
+
+### 📊 [Evaluation](skills/evaluation/)
+
+
+---
+
+### 🧪 [Testing](skills/testing/)
+
+
+---
+
+### 🔭 [Observability](skills/observability/)
+
 
 ---
 
@@ -202,10 +222,10 @@ For complete submission criteria and writing guidelines, read [CONTRIBUTING.md](
 ### Roadmap
 
 - [x] Establish canonical 13-category architecture and schema standards.
-- [x] Release Draft 07 JSON Schema and 28-section tool documentation templates.
-- [ ] Expand category indexes with comprehensive open-source tool documentation.
-- [ ] Deploy automated CI workflows for link checking and SVG/PDF validation.
-- [ ] Launch web index site powered by `metadata.json` schemas.
+- [x] Launch standardized 28-section tool documentation templates.
+- [ ] Expand tool documentation coverage across all 13 categories to 100+ open-source tools.
+- [ ] Implement automated CI workflows for link checking and SVG/PDF validation.
+- [ ] Launch interactive web search index powered by `metadata.json`.
 
 ### FAQ
 
@@ -217,6 +237,9 @@ A: To maintain a clean, scalable landing page. Tool comparisons, star metrics, a
 
 **Q: Can proprietary tools be documented?**  
 A: No. We exclusively document open-source projects, open protocols (like MCP), and open standards.
+
+**Q: How do I add a new tool?**  
+A: Review [CONTRIBUTING.md](CONTRIBUTING.md), copy the templates in `templates/`, and submit a Pull Request.
 
 ---
 
