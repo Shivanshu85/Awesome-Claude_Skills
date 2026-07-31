@@ -6,7 +6,7 @@ The Memory Layer for Personalized AI Applications, Autonomous Agents, and Enterp
 
 Provides an intelligent, self-improving memory layer that retains facts, user preferences, and cross-session context across LLM interactions.
 
-[Official Website](https://mem0.ai) • [Documentation](https://docs.mem0.ai) • [GitHub Repository](https://github.com/mem0ai/mem0) • [📖 Interactive Guide (HTML)](guide.html)
+[Official Website](https://mem0.ai) • [Documentation](https://docs.mem0.ai) • [GitHub Repository](https://github.com/mem0ai/mem0) • [🌐 Interactive Guide](https://Shivanshu85.github.io/Awesome-Claude_Skills/skills/memory/mem0/guide.html) |
 
 ![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)
 ![Category](https://img.shields.io/badge/Category-AI_Memory_Infrastructure-orange)
@@ -33,7 +33,7 @@ Designed for AI application developers, agent engineers, and developer tool crea
 | :--- | :--- |
 | **Category** | AI Memory Infrastructure & Context Optimization |
 | **Subcategory** | Vector-Graph Hybrid Store / LLM Orchestration Layer |
-| **Interactive Guide** | [📖 Open Guide HTML (Relative)](guide.html) • [🌐 GitHub Pages Site](https://Shivanshu85.github.io/Awesome-Claude_Skills/skills/memory/mem0/guide.html) |
+| **Interactive Guide** |[🌐 GitHub Pages Site](https://Shivanshu85.github.io/Awesome-Claude_Skills/skills/memory/mem0/guide.html) |
 | **License** | Apache 2.0 License |
 | **Primary Languages** | Python, TypeScript |
 | **Repository** | [github.com/mem0ai/mem0](https://github.com/mem0ai/mem0) |
@@ -131,15 +131,68 @@ Designed for AI application developers, agent engineers, and developer tool crea
 ### Python SDK
 ```bash
 pip install mem0ai
+
+```
+
+
+
+### Node.js / TypeScript SDK
+
+```bash
+npm install mem0ai
+
+```
+
+### CLI Tool
+
+```bash
+pip install mem0-cli
+
+```
+
+*For official detailed installation options, visit [docs.mem0.ai](https://docs.mem0.ai).*
+
+---
+
+## Quick Start
+
+### 1. Initialize Memory
+
+```python
+from mem0 import Memory
+
+m = Memory()
+
+```
+
+### 2. Add Conversations (Extract & Ingest)
+
+```python
+messages = [
+    {"role": "user", "content": "I am Alex. I specialize in SvelteKit and live in Seattle."},
+    {"role": "assistant", "content": "Got it! Nice to meet you Alex."}
+]
+
+m.add(messages, user_id="alex_123")
+
+```
+
+### 3. Retrieve Context for Prompts
+
+```python
+relevant_memories = m.search("What UI framework does the user prefer?", user_id="alex_123")
+print(relevant_memories)
+
 ```
 
 ---
+
 
 ## 📖 Interactive Technical Guide
 
 Explore the interactive HTML documentation guide:
 
-- 📁 **[Open Local Guide File (guide.html)](guide.html)** *(Works natively when browsing on GitHub)*
+
 - 🌐 **[Open Live GitHub Pages Site](https://Shivanshu85.github.io/Awesome-Claude_Skills/skills/memory/mem0/guide.html)** *(Requires GitHub Pages enabled in repo settings)*
 - 👁️ **[Open HTML Preview Gateway](https://htmlpreview.github.io/?https://github.com/Shivanshu85/Awesome-Claude_Skills/blob/main/skills/memory/mem0/guide.html)** *(Instant live HTML rendering)*
 
@@ -149,3 +202,53 @@ Includes:
 - Head-to-Head Comparison Table (Mem0 vs. Naive RAG vs. LangChain)
 - Vector Store Driver & Configuration Options
 - Best Practices, Anti-Patterns & Troubleshooting
+
+## Repository Structure
+
+The files included in this documentation repository:
+
+```text
+.
+├── README.md         # This quick reference guide
+├── Guide.pdf         # Comprehensive technical manual and benchmark PDF
+├── guide.html        # Single-file printable HTML documentation
+├── workflow.mmd      # Source Mermaid diagram definitions
+├── workflow.svg      # Rendered architectural workflow diagram
+└── metadata.json     # Complete tool metadata and repository metrics
+
+```
+
+---
+
+## Resources
+
+* [Official Website](https://mem0.ai)
+* [Official Documentation](https://docs.mem0.ai)
+* [GitHub Repository](https://github.com/mem0ai/mem0)
+* [Mem0 Cloud Platform](https://app.mem0.ai)
+* [npm Package (MCP Server)](https://www.google.com/search?q=https://www.npmjs.com/package/mem0-mcp)
+
+---
+
+## Similar Tools
+
+* **Graphiti:** Knowledge graph-focused long-term memory store; best when entity relationships outweigh vector similarity.
+* **Zep (GetZep):** Commercial/Open-source memory server; alternative for enterprise chat history indexing.
+* **LLMLingua:** Prompt compression tool; best for token reduction via linguistic compression rather than fact extraction.
+* **RepoMix:** Source code packing utility; ideal for dumping repository files into context windows rather than maintaining user state.
+
+---
+
+## License
+
+This project is licensed under the [Apache 2.0 License](https://github.com/mem0ai/mem0/blob/main/LICENSE).
+
+---
+
+## Learn More
+
+For complete architectural breakdowns, vector-graph hybrid schema diagrams, token savings benchmarks, advanced configuration dictionaries, and enterprise deployment guidelines, refer to **`Guide.pdf`** or open **`guide.html`** in your browser.
+
+```
+
+```
