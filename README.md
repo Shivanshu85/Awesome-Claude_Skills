@@ -9,7 +9,6 @@
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/Docs_License-CC_BY_4.0-blue.svg" alt="License: CC BY 4.0"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/Tools_License-MIT-yellow.svg" alt="License: MIT"></a>
   <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a>
   <a href="schemas/metadata.schema.json"><img src="https://img.shields.io/badge/Schema-Draft_07-informational.svg" alt="Schema Version"></a>
@@ -115,89 +114,89 @@ Find the appropriate category based on your immediate engineering bottleneck:
 ```text
 Awesome-Claude_Skills/
 │
-├── README.md                          <- Root Landing Page & Central Index
-├── LICENSE                            <- Creative Commons Attribution 4.0 International (CC BY 4.0)
-├── MIT.txt                            <- MIT License for Schemas, Templates & Tooling
-├── CONTRIBUTING.md                    <- Contributor Manual & Review Workflow
-├── CODE_OF_CONDUCT.md                 <- Community Guidelines (Contributor Covenant v2.1)
-├── SECURITY.md                        <- Security & Disclosure Policy
-├── CHANGELOG.md                       <- Repository Release & Architectural History
-├── .gitignore                         <- Clean Repository Exclusions
+├── README.md                          <- Root Landing Page & Central Documentation Hub
+├── LICENSE                            <- Documentation License (CC BY 4.0)
+├── MIT.txt                            <- Tooling, Templates & Schemas License (MIT)
+├── CONTRIBUTING.md                    <- Contributor Guide & Submission Workflow
+├── CODE_OF_CONDUCT.md                 <- Community Covenant Code of Conduct (v2.1)
+├── SECURITY.md                        <- Security Policy & Vulnerability Disclosure
+├── CHANGELOG.md                       <- Release History & Architectural Decison Log
+├── .gitignore                         <- Comprehensive Exclusion Rules
 │
 ├── .github/
-│   ├── PULL_REQUEST_TEMPLATE.md
+│   ├── PULL_REQUEST_TEMPLATE.md       <- PR Review Checklist
 │   └── ISSUE_TEMPLATE/
-│       ├── new_tool_request.yml
-│       └── tool_update.yml
+│       ├── new_tool_request.yml       <- Structured Tool Request Form
+│       └── tool_update.yml            <- Tool Metadata Update Form
 │
 ├── assets/
-│   └── Banner.webp
+│   └── Banner.webp                    <- High-Resolution Banner Image
 │
 ├── docs/
-│   ├── taxonomy.md
-│   ├── glossary.md
-│   └── standards.md
+│   ├── taxonomy.md                    <- Canonical 13-Category Domain Taxonomy
+│   ├── glossary.md                    <- AI Context & Optimization Glossary
+│   └── standards.md                   <- Documentation Standards & Quality Metrics
 │
 ├── schemas/
-│   └── metadata.schema.json
+│   └── metadata.schema.json           <- Machine-Readable Draft-07 JSON Schema
 │
 ├── templates/
-│   ├── README.template.md
-│   ├── metadata.template.json
-│   └── workflow.template.mmd
+│   ├── README.template.md             <- Standardized 28-Section Tool README Template
+│   ├── metadata.template.json         <- JSON Metadata Starter Template
+│   └── workflow.template.mmd          <- Mermaid Architecture Diagram Template
 │
-└── skills/
-    ├── memory/
-    ├── context/
-    ├── context-compression/
-    ├── token-optimization/
-    ├── prompt-engineering/
-    ├── codebase-intelligence/
-    ├── mcp/
-    ├── developer-productivity/
-    ├── agent-workflows/
-    ├── security/
-    ├── evaluation/
-    ├── testing/
-    └── observability/
+└── skills/                            <- 13 Canonical Domain Category Directories
+    ├── memory/                        <- Memory Systems & Persistent State Retention
+    │   └── mem0/                      <- Mem0 Complete Documentation Package
+    │       ├── README.md              <- Overview, Statistics & SDK Quickstart
+    │       ├── guide.html             <- Interactive Technical & Architecture Guide
+    │       ├── metadata.json          <- Machine-Readable Tool Metadata
+    │       └── LICENSE                <- Apache-2.0 License File
+    ├── context/                       <- Context Window Assembly & Token Packing
+    ├── context-compression/           <- Prompt & Context Compression Algorithms
+    ├── token-optimization/            <- Token Economy & API Cost Reduction
+    ├── prompt-engineering/            <- System Prompts & Structured Schemas
+    ├── codebase-intelligence/         <- Codebase Indexing & AST Symbol Graphs
+    ├── mcp/                           <- Model Context Protocol Servers & Gateways
+    ├── developer-productivity/        <- Workflow Automation & IDE Extensions
+    ├── agent-workflows/               <- Multi-Agent Swarms & Sequential Reasoning
+    ├── security/                      <- AI Guardrails, Privacy & Tool Safety
+    ├── evaluation/                    <- Prompt Quality & LLM Benchmarking
+    ├── testing/                       <- Assertion Frameworks & Agent Testing
+    └── observability/                 <- Telemetry, Token Tracing & Cost Monitoring
 ```
 
 ### Directory Responsibilities
 
-- **`skills/`**: Contains every documented AI optimization tool organized by category.
-- **`docs/`**: Core repository knowledge infrastructure, including documentation standards, domain taxonomy, and glossary.
-- **`templates/`**: Starter templates (`README.template.md`, `metadata.template.json`, `workflow.template.mmd`) used to document every tool.
-- **`schemas/`**: Machine-readable JSON Schema (`metadata.schema.json`) for tool indexing and AI agent validation.
-- **`assets/`**: Repository visual assets, branding, and diagrams.
-- **`.github/`**: Contribution workflow automation, issue forms, and PR templates.
+- **`skills/`**: The core documentation library, containing standardized documentation packages organized across 13 canonical domain categories.
+- **`docs/`**: Core repository knowledge infrastructure, providing authoritative specifications for category taxonomy, technical glossary definitions, and quality standards.
+- **`templates/`**: Production-ready starter templates (`README.template.md`, `metadata.template.json`, `workflow.template.mmd`) enforced for all tool contributions.
+- **`schemas/`**: Formal Draft-07 JSON Schema (`metadata.schema.json`) enabling automated validation, machine indexing, and programmatic querying by AI coding agents.
+- **`assets/`**: High-resolution visual branding assets, architectural diagrams, and repository banners.
+- **`.github/`**: Automation workflows, issue templates (`new_tool_request.yml`, `tool_update.yml`), and pull request submission guidelines.
 
 ### Individual Tool Specifications
 
-Every tool documented under `skills/<category>/<tool-slug>/` adheres strictly to a standardized 5-file specification:
+Every tool documented under `skills/<category>/<tool-slug>/` adheres strictly to a standardized 4-file documentation package specification:
 
 ```text
 skills/<category>/<tool-slug>/
 │
-├── README.md              <- Authoritative 28-section documentation
-├── metadata.json          <- Machine-readable metadata schema
-└── LICENSE                <- Skill-level license file
+├── README.md              <- Authoritative overview, GitHub badges, statistics, & quickstart
+├── guide.html             <- Comprehensive interactive technical guide (Architecture, Comparison, FAQ)
+├── metadata.json          <- Machine-readable metadata matching schemas/metadata.schema.json
+└── LICENSE                <- Skill-level open-source license file
 ```
 
-Detailed rankings, tool comparisons, stars, maintenance statuses, and learning orders are maintained inside each category's [`README.md`](skills/memory/README.md) file.
+- **`README.md`**: Provides immediate 30-second developer discovery, project statistics, problems solved, compatibility matrix, and installation options.
+- **`guide.html`**: Delivers a full, responsive interactive technical manual featuring SVG architecture diagrams, multi-language SDK examples, vector store configuration tables, and troubleshooting steps.
+- **`metadata.json`**: Enables instant parsing of tool properties (category, license, subcategory, primary languages, repository stats) by AI agents and indexers.
+- **`LICENSE`**: Preserves exact upstream license compliance for every documented tool.
+
+Category-level summaries, tool comparisons, star counts, and learning pathways are maintained inside each category's [`README.md`](skills/memory/README.md) file.
 
 ---
 
-## 📏 Repository Standards
-
-Review our core standards before reading or contributing tool documentation:
-
-- 📐 **[Documentation Standards](docs/standards.md)**: Rules for writing, section hierarchy, and qualitative impact ratings.
-- 📖 **[Category Taxonomy Guide](docs/taxonomy.md)**: Category definitions, boundaries, and inclusion rules.
-- 📚 **[AI Optimization Glossary](docs/glossary.md)**: Universal definitions for RAG, MCP, Context Window, Prompt Cache, AST Parsing, and Sequential Thinking.
-- 🤖 **[Metadata Schema](schemas/metadata.schema.json)**: Draft 07 JSON Schema for machine indexing.
-- 📑 **[README Template](templates/README.template.md)**: Mandatory 28-section starter template for tool pages.
-
----
 
 ## 🤝 Contributing
 
