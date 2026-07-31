@@ -119,7 +119,6 @@ Awesome-Claude_Skills/
 ├── CONTRIBUTING.md                    <- Contributor Guide & Submission Manual
 ├── CODE_OF_CONDUCT.md                 <- Community Covenant Code of Conduct (v2.1)
 ├── SECURITY.md                        <- Security Policy & Vulnerability Disclosure
-├── CHANGELOG.md                       <- Release History & Architectural Decision Log
 ├── .gitignore                         <- Comprehensive Exclusion Rules
 │
 ├── .github/
