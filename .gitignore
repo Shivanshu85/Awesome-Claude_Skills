@@ -45,6 +45,10 @@ tmp/
 .mermaid-cli/
 .pdf-temp/
 
+# Temporary & Heavy Media Assets
+assets/banner.png
+assets/*.png.tmp
+
 # Environment Variables & Local Secrets
 .env
 .env.local
