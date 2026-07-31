@@ -6,7 +6,7 @@ The Memory Layer for Personalized AI Applications, Autonomous Agents, and Enterp
 
 Provides an intelligent, self-improving memory layer that retains facts, user preferences, and cross-session context across LLM interactions.
 
-[Official Website](https://mem0.ai) • [Documentation](https://docs.mem0.ai) • [GitHub Repository](https://github.com/mem0ai/mem0) • [📖 Open Interactive Guide](https://Shivanshu85.github.io/awesome-ai-skills/skills/memory/mem0/guide.html)
+[Official Website](https://mem0.ai) • [Documentation](https://docs.mem0.ai) • [GitHub Repository](https://github.com/mem0ai/mem0) • [📖 Interactive Guide (HTML)](guide.html)
 
 ![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)
 ![Category](https://img.shields.io/badge/Category-AI_Memory_Infrastructure-orange)
@@ -33,7 +33,7 @@ Designed for AI application developers, agent engineers, and developer tool crea
 | :--- | :--- |
 | **Category** | AI Memory Infrastructure & Context Optimization |
 | **Subcategory** | Vector-Graph Hybrid Store / LLM Orchestration Layer |
-| **Interactive Guide** | [📖 Open Guide HTML](https://Shivanshu85.github.io/awesome-ai-skills/skills/memory/mem0/guide.html) |
+| **Interactive Guide** | [📖 Open Guide HTML (Relative)](guide.html) • [🌐 GitHub Pages Site](https://Shivanshu85.github.io/Awesome-Claude_Skills/skills/memory/mem0/guide.html) |
 | **License** | Apache 2.0 License |
 | **Primary Languages** | Python, TypeScript |
 | **Repository** | [github.com/mem0ai/mem0](https://github.com/mem0ai/mem0) |
@@ -137,9 +137,11 @@ pip install mem0ai
 
 ## 📖 Interactive Technical Guide
 
-Explore the hosted, full interactive HTML documentation guide:
+Explore the interactive HTML documentation guide:
 
-👉 **[Open Mem0 Technical Guide (guide.html)](https://Shivanshu85.github.io/awesome-ai-skills/skills/memory/mem0/guide.html)**
+- 📁 **[Open Local Guide File (guide.html)](guide.html)** *(Works natively when browsing on GitHub)*
+- 🌐 **[Open Live GitHub Pages Site](https://Shivanshu85.github.io/Awesome-Claude_Skills/skills/memory/mem0/guide.html)** *(Requires GitHub Pages enabled in repo settings)*
+- 👁️ **[Open HTML Preview Gateway](https://htmlpreview.github.io/?https://github.com/Shivanshu85/Awesome-Claude_Skills/blob/main/skills/memory/mem0/guide.html)** *(Instant live HTML rendering)*
 
 Includes:
 - Interactive System Architecture Diagram
