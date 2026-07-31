@@ -69,25 +69,7 @@ Designed for AI application developers, agent engineers, and developer tool crea
 * **Model Context Protocol (MCP) Support:** Connects directly to AI coding tools like Claude Code, Cursor, and Windsurf[cite: 1].
 * **Self-Hostable & Air-Gapped:** Can be run 100% locally with Ollama and local Qdrant/Chroma databases for complete data privacy[cite: 1].
 
----
 
-## Problems Solved
-
-* **LLM Amnesia:** Prevents AI tools from forgetting user preferences and decisions between chat sessions[cite: 1].
-* **Context Window Bloat:** Stops exponential token usage caused by stuffing full chat histories into prompts[cite: 1].
-* **Contradictory Memories:** Automatically updates or deletes outdated facts when user state changes[cite: 1].
-* **High Inference Latency:** Accelerates Time-To-First-Token (TTFT) by reducing prompt payload lengths[cite: 1].
-* **Memory Duplication:** Consolidates redundant conversational facts into clean atomic entries[cite: 1].
-
----
-
-## Key Features
-
-* **LLM-Driven Fact Extraction:** Automatically parses natural language to extract key preferences, traits, and facts[cite: 1].
-* **Dynamic Memory Mutation:** Executes `ADD`, `UPDATE`, `DELETE`, or `NONE` operations during ingestion based on historical context[cite: 1].
-* **Hybrid Vector-Graph Architecture:** Combines dense embeddings with Neo4j/Neptune relational knowledge graphs[cite: 1].
-* **Plug-and-Play Connectors:** Supports Qdrant, Pgvector, Pinecone, Milvus, Chroma, Weaviate, OpenAI, Anthropic, and Groq[cite: 1].
-* **Multi-Language SDKs:** Native Python SDK, Node.js/TypeScript client, REST API, and CLI binary[cite: 1].
 
 ---
 
@@ -196,12 +178,7 @@ Explore the interactive HTML documentation guide:
 - 🌐 **[Open Live GitHub Pages Site](https://Shivanshu85.github.io/Awesome-Claude_Skills/skills/memory/mem0/guide.html)** *(Requires GitHub Pages enabled in repo settings)*
 - 👁️ **[Open HTML Preview Gateway](https://htmlpreview.github.io/?https://github.com/Shivanshu85/Awesome-Claude_Skills/blob/main/skills/memory/mem0/guide.html)** *(Instant live HTML rendering)*
 
-Includes:
-- Interactive System Architecture Diagram
-- Complete Python & TypeScript Code Snippets
-- Head-to-Head Comparison Table (Mem0 vs. Naive RAG vs. LangChain)
-- Vector Store Driver & Configuration Options
-- Best Practices, Anti-Patterns & Troubleshooting
+
 
 ## Repository Structure
 
@@ -210,10 +187,8 @@ The files included in this documentation repository:
 ```text
 .
 ├── README.md         # This quick reference guide
-├── Guide.pdf         # Comprehensive technical manual and benchmark PDF
 ├── guide.html        # Single-file printable HTML documentation
-├── workflow.mmd      # Source Mermaid diagram definitions
-├── workflow.svg      # Rendered architectural workflow diagram
+├── LICENSE           # Exact Licenese from mem0 repository
 └── metadata.json     # Complete tool metadata and repository metrics
 
 ```
@@ -245,10 +220,4 @@ This project is licensed under the [Apache 2.0 License](https://github.com/mem0a
 
 ---
 
-## Learn More
 
-For complete architectural breakdowns, vector-graph hybrid schema diagrams, token savings benchmarks, advanced configuration dictionaries, and enterprise deployment guidelines, refer to **`Guide.pdf`** or open **`guide.html`** in your browser.
-
-```
-
-```
