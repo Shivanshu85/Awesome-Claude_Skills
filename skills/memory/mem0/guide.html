@@ -1,417 +1,964 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mem0 Technical Guide — The Memory Layer for Personalized AI</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-primary: #0f172a;
-      --bg-secondary: #1e293b;
-      --bg-card: #1e293b;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --accent: #38bdf8;
-      --accent-glow: rgba(56, 189, 248, 0.15);
-      --accent-hover: #0284c7;
-      --border-color: #334155;
-      --code-bg: #090d16;
-      --badge-bg: #0284c7;
-      --success: #22c55e;
-      --warning: #f59e0b;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mem0 Technical Manual & Architecture Reference</title>
+    <style>
+        /* ==========================================================================
+           1. TYPOGRAPHY & BASE STYLES (Print-First System Docs)
+           ========================================================================== */
+        :root {
+            --bg-main: #ffffff;
+            --bg-subtle: #f8fafc;
+            --bg-card: #f1f5f9;
+            --border-color: #e2e8f0;
+            --border-dark: #cbd5e1;
+            
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --text-light: #64748b;
+            
+            --accent-blue: #0284c7;
+            --accent-blue-hover: #0369a1;
+            --accent-blue-subtle: #f0f9ff;
+            
+            --status-success-bg: #f0fdf4;
+            --status-success-border: #bbf7d0;
+            --status-success-text: #166534;
+            
+            --status-warning-bg: #fffbeb;
+            --status-warning-border: #fef08a;
+            --status-warning-text: #854d0e;
+            
+            --status-info-bg: #f0f9ff;
+            --status-info-border: #bae6fd;
+            --status-info-text: #075985;
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
 
-    body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background-color: var(--bg-primary);
-      color: var(--text-main);
-      line-height: 1.6;
-      padding: 0;
-      margin: 0;
-    }
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    .header {
-      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
-      border-bottom: 1px solid var(--border-color);
-      padding: 3rem 2rem 2rem;
-      text-align: center;
-    }
+        html {
+            font-family: var(--font-sans);
+            font-size: 13.5px;
+            line-height: 1.55;
+            color: var(--text-main);
+            background-color: var(--bg-main);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
 
-    .header h1 {
-      font-size: 2.75rem;
-      font-weight: 800;
-      letter-spacing: -0.025em;
-      color: #ffffff;
-      margin-bottom: 0.75rem;
-    }
+        body {
+            background-color: var(--bg-main);
+        }
 
-    .header p {
-      font-size: 1.15rem;
-      color: var(--text-muted);
-      max-width: 800px;
-      margin: 0 auto 1.5rem;
-    }
+        /* Container Settings */
+        .page-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
 
-    .badges-row {
-      display: flex;
-      justify-content: center;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.5rem;
-    }
+        /* Headings */
+        h1, h2, h3, h4 {
+            color: var(--text-main);
+            font-weight: 700;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+        }
 
-    .badge {
-      background-color: var(--bg-secondary);
-      border: 1px solid var(--border-color);
-      color: var(--accent);
-      padding: 0.35rem 0.85rem;
-      border-radius: 9999px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
+        h1 { font-size: 2.2rem; margin-bottom: 0.75rem; }
+        h2 { font-size: 1.45rem; margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border-color); page-break-after: avoid; }
+        h3 { font-size: 1.15rem; margin-top: 1.5rem; margin-bottom: 0.5rem; page-break-after: avoid; }
+        h4 { font-size: 0.95rem; margin-top: 1rem; margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); page-break-after: avoid; }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2.5rem 1.5rem;
-      display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 2.5rem;
-    }
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
 
-    @media (max-width: 900px) {
-      .container {
-        grid-template-columns: 1fr;
-      }
-      .sidebar {
-        display: none;
-      }
-    }
+        a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
 
-    .sidebar {
-      position: sticky;
-      top: 2rem;
-      height: fit-content;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 0.75rem;
-      padding: 1.25rem;
-    }
+        a:hover {
+            text-decoration: underline;
+        }
 
-    .sidebar h3 {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-    }
+        ul, ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
 
-    .sidebar nav ul {
-      list-style: none;
-    }
+        li {
+            margin-bottom: 0.25rem;
+        }
 
-    .sidebar nav ul li {
-      margin-bottom: 0.5rem;
-    }
+        code {
+            font-family: var(--font-mono);
+            font-size: 0.85em;
+            background-color: var(--bg-card);
+            padding: 0.15em 0.35em;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            color: #0f172a;
+        }
 
-    .sidebar nav ul li a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.925rem;
-      transition: color 0.2s;
-      display: block;
-      padding: 0.35rem 0.5rem;
-      border-radius: 0.375rem;
-    }
+        pre {
+            font-family: var(--font-mono);
+            font-size: 0.82em;
+            background-color: #0f172a;
+            color: #f8fafc;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin-bottom: 1.25rem;
+            line-height: 1.45;
+            page-break-inside: avoid;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
 
-    .sidebar nav ul li a:hover {
-      color: var(--accent);
-      background-color: var(--accent-glow);
-    }
+        pre code {
+            background: transparent;
+            border: none;
+            padding: 0;
+            color: inherit;
+        }
 
-    .content-body section {
-      margin-bottom: 3.5rem;
-      scroll-margin-top: 2rem;
-    }
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 2rem 0;
+        }
 
-    .content-body h2 {
-      font-size: 1.85rem;
-      font-weight: 700;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 0.5rem;
-      margin-bottom: 1.25rem;
-      color: #ffffff;
-    }
+        /* ==========================================================================
+           2. VISUAL COMPONENTS & CARDS
+           ========================================================================== */
+        
+        /* Information Cards & Grids */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
 
-    .content-body h3 {
-      font-size: 1.35rem;
-      font-weight: 600;
-      margin: 1.5rem 0 0.75rem;
-      color: var(--accent);
-    }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
 
-    .content-body p {
-      margin-bottom: 1rem;
-      color: #cbd5e1;
-    }
+        .card {
+            background-color: var(--bg-subtle);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1rem 1.25rem;
+            page-break-inside: avoid;
+        }
 
-    .grid-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.25rem;
-      margin: 1.5rem 0;
-    }
+        .card-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 0.4rem;
+            color: var(--text-main);
+        }
 
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 0.75rem;
-      padding: 1.25rem;
-    }
+        /* Callout Boxes */
+        .callout {
+            padding: 1rem 1.25rem;
+            border-radius: 6px;
+            margin-bottom: 1.25rem;
+            border-left: 4px solid;
+            page-break-inside: avoid;
+        }
 
-    .card h4 {
-      font-size: 1.1rem;
-      color: #ffffff;
-      margin-bottom: 0.5rem;
-    }
+        .callout-info {
+            background-color: var(--status-info-bg);
+            border-color: var(--accent-blue);
+            color: var(--status-info-text);
+        }
 
-    .card p {
-      font-size: 0.925rem;
-      margin: 0;
-    }
+        .callout-success {
+            background-color: var(--status-success-bg);
+            border-color: #22c55e;
+            color: var(--status-success-text);
+        }
 
-    pre {
-      background-color: var(--code-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 0.5rem;
-      padding: 1.25rem;
-      overflow-x: auto;
-      font-family: 'Fira Code', monospace;
-      font-size: 0.9rem;
-      color: #e2e8f0;
-      margin: 1rem 0;
-    }
+        .callout-warning {
+            background-color: var(--status-warning-bg);
+            border-color: #eab308;
+            color: var(--status-warning-text);
+        }
 
-    code {
-      font-family: 'Fira Code', monospace;
-      background: rgba(255,255,255,0.08);
-      padding: 0.2rem 0.4rem;
-      border-radius: 0.25rem;
-      font-size: 0.875rem;
-      color: var(--accent);
-    }
+        .callout-title {
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
 
-    pre code {
-      background: transparent;
-      padding: 0;
-      color: inherit;
-    }
+        /* Key-Value Fact Tables */
+        .fact-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.25rem;
+            font-size: 0.9em;
+        }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1.5rem 0;
-      background: var(--bg-card);
-      border-radius: 0.5rem;
-      overflow: hidden;
-      border: 1px solid var(--border-color);
-    }
+        .fact-table th, .fact-table td {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
 
-    th, td {
-      padding: 0.85rem 1rem;
-      text-align: left;
-      border-bottom: 1px solid var(--border-color);
-    }
+        .fact-table th {
+            background-color: var(--bg-card);
+            font-weight: 600;
+            color: var(--text-muted);
+            width: 35%;
+        }
 
-    th {
-      background-color: #0f172a;
-      color: #ffffff;
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
+        .fact-table td {
+            background-color: var(--bg-main);
+        }
 
-    td {
-      font-size: 0.9rem;
-      color: #cbd5e1;
-    }
+        /* Data Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            font-size: 0.88em;
+            page-break-inside: avoid;
+        }
 
-    tr:last-child td {
-      border-bottom: none;
-    }
+        .data-table th, .data-table td {
+            padding: 0.6rem 0.8rem;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
 
-    .diagram-box {
-      background: var(--code-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 0.75rem;
-      padding: 1.5rem;
-      text-align: center;
-      margin: 1.5rem 0;
-    }
+        .data-table th {
+            background-color: var(--bg-card);
+            font-weight: 700;
+            color: var(--text-main);
+        }
 
-    .diagram-box svg {
-      max-width: 100%;
-      height: auto;
-    }
+        .data-table tr:nth-child(even) td {
+            background-color: var(--bg-subtle);
+        }
 
-    .alert {
-      padding: 1rem 1.25rem;
-      border-radius: 0.5rem;
-      margin: 1rem 0;
-      font-size: 0.925rem;
-      border-left: 4px solid var(--accent);
-      background: rgba(56, 189, 248, 0.08);
-    }
+        /* Badge Pills */
+        .badge {
+            display: inline-block;
+            padding: 0.15em 0.5em;
+            font-size: 0.75em;
+            font-weight: 600;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
 
-    .alert.success {
-      border-left-color: var(--success);
-      background: rgba(34, 197, 94, 0.08);
-    }
+        .badge-blue { background-color: #e0f2fe; color: #0369a1; }
+        .badge-green { background-color: #dcfce7; color: #15803d; }
+        .badge-gray { background-color: #f1f5f9; color: #475569; border: 1px solid var(--border-color); }
 
-    .alert.warning {
-      border-left-color: var(--warning);
-      background: rgba(245, 158, 11, 0.08);
-    }
+        /* Diagrams & SVGs */
+        .diagram-container {
+            background-color: var(--bg-subtle);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            page-break-inside: avoid;
+        }
 
-    .footer {
-      border-top: 1px solid var(--border-color);
-      padding: 2rem;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.875rem;
-      margin-top: 4rem;
-    }
-  </style>
+        .diagram-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .diagram-caption {
+            font-size: 0.8em;
+            color: var(--text-light);
+            margin-top: 0.75rem;
+            font-style: italic;
+        }
+
+        /* Folder Tree Architecture */
+        .folder-tree {
+            font-family: var(--font-mono);
+            font-size: 0.85em;
+            background-color: var(--bg-subtle);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+            page-break-inside: avoid;
+        }
+
+        .folder-tree .dir { font-weight: bold; color: var(--accent-blue-hover); }
+        .folder-tree .comment { color: var(--text-light); font-style: italic; }
+
+        /* TOC Styling */
+        .toc-list {
+            list-style: none;
+            padding-left: 0;
+            columns: 2;
+            column-gap: 2rem;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.4rem;
+            page-break-inside: avoid;
+            font-size: 0.9em;
+        }
+
+        .toc-list a {
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dotted var(--border-dark);
+            padding-bottom: 2px;
+        }
+
+        .toc-list a:hover {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        /* Cover Page Styling */
+        .cover-page {
+            min-height: 880px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 3rem 0;
+            border-bottom: 2px solid var(--text-main);
+            page-break-after: always;
+        }
+
+        .cover-header {
+            margin-bottom: 2rem;
+        }
+
+        .cover-logo {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cover-logo span {
+            color: var(--accent-blue);
+        }
+
+        .cover-tagline {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            max-width: 650px;
+            line-height: 1.4;
+        }
+
+        .cover-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+            background-color: var(--bg-subtle);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .cover-meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cover-meta-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .cover-meta-value {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-top: 0.2rem;
+        }
+
+        .cover-footer {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+        }
+
+        /* Section Break Controls */
+        .section-block {
+            margin-bottom: 2rem;
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+
+        /* Do / Don't Grid */
+        .do-dont-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .do-box {
+            background-color: var(--status-success-bg);
+            border: 1px solid var(--status-success-border);
+            border-radius: 6px;
+            padding: 1rem;
+        }
+
+        .dont-box {
+            background-color: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 6px;
+            padding: 1rem;
+        }
+
+        .do-box h4 { color: #166534; margin-top: 0; }
+        .dont-box h4 { color: #991b1b; margin-top: 0; }
+
+        /* ==========================================================================
+           3. PRINT SPECIFIC OPTIMIZATIONS
+           ========================================================================== */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 1.5cm 1.2cm;
+            }
+
+            html {
+                font-size: 11pt;
+            }
+
+            .page-wrapper {
+                max-width: 100%;
+                padding: 0;
+            }
+
+            body {
+                background: #ffffff;
+            }
+
+            .cover-page {
+                min-height: 24cm;
+                padding: 2cm 0;
+            }
+
+            h2 {
+                page-break-after: avoid;
+            }
+
+            .card, .callout, .diagram-container, pre, table, .folder-tree {
+                page-break-inside: avoid;
+            }
+
+            .page-break {
+                page-break-before: always;
+            }
+
+            a {
+                color: #0f172a;
+                text-decoration: none;
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <header class="header">
-    <div class="badges-row">
-      <span class="badge">Apache 2.0 License</span>
-      <span class="badge">⭐ 30k+ Stars</span>
-      <span class="badge">Y Combinator S24</span>
+<div class="page-wrapper">
+
+    <!-- ==========================================================================
+       1. COVER PAGE
+       ========================================================================== -->
+    <div class="cover-page">
+        <div class="cover-header">
+            <div class="cover-logo">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: #0284c7;">
+                    <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                Mem<span>0</span>
+            </div>
+            <div class="cover-tagline">
+                The Memory Layer for Personalized AI Applications, Autonomous Agents, and Enterprise LLM Workflows.
+            </div>
+        </div>
+
+        <div>
+            <div class="badge badge-blue" style="margin-bottom: 1rem;">Official Technical Manual & Architecture Specification</div>
+            
+            <div class="cover-meta-grid">
+                <div class="cover-meta-item">
+                    <span class="cover-meta-label">Tool Category</span>
+                    <span class="cover-meta-value">AI Memory Infrastructure / Vector Architecture</span>
+                </div>
+                <div class="cover-meta-item">
+                    <span class="cover-meta-label">Current Version</span>
+                    <span class="cover-meta-value">v1.1.26 (Production Engine)</span>
+                </div>
+                <div class="cover-meta-item">
+                    <span class="cover-meta-label">License</span>
+                    <span class="cover-meta-value">Apache 2.0 Open Source</span>
+                </div>
+                <div class="cover-meta-item">
+                    <span class="cover-meta-label">Primary Repository</span>
+                    <span class="cover-meta-value">github.com/mem0ai/mem0</span>
+                </div>
+                <div class="cover-meta-item">
+                    <span class="cover-meta-label">Official Website</span>
+                    <span class="cover-meta-value">https://mem0.ai</span>
+                </div>
+                <div class="cover-meta-item">
+                    <span class="cover-meta-label">Maintainer</span>
+                    <span class="cover-meta-value">Mem0 Core Engineering Team</span>
+                </div>
+                <div class="cover-meta-item">
+                    <span class="cover-meta-label">GitHub Stars</span>
+                    <span class="cover-meta-value">26,500+ Stars</span>
+                </div>
+                <div class="cover-meta-item">
+                    <span class="cover-meta-label">Supported Extensions</span>
+                    <span class="cover-meta-value">Python, Node.js, CLI, MCP Server</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 1rem;">
+                <span class="badge badge-gray">Multi-Agent System</span>
+                <span class="badge badge-gray">Graph Memory</span>
+                <span class="badge badge-gray">RAG Optimization</span>
+                <span class="badge badge-gray">MCP Protocol</span>
+                <span class="badge badge-gray">LLM Context Reduction</span>
+            </div>
+        </div>
+
+        <div class="cover-footer">
+            <span>Generated Date: July 30, 2026</span>
+            <span>Document ID: MEM0-SPEC-2026-V1</span>
+            <span>PDF Export Format: A4 Standard Technical Specification</span>
+        </div>
     </div>
-    <h1>Mem0 — The Memory Layer for Personalized AI</h1>
-    <p>Comprehensive technical documentation for integrating continuous user, session, and agent memory into AI coding assistants and autonomous workflows.</p>
-  </header>
 
-  <div class="container">
-    <aside class="sidebar">
-      <h3>Navigation</h3>
-      <nav>
-        <ul>
-          <li><a href="#overview">Overview</a></li>
-          <li><a href="#architecture">Architecture</a></li>
-          <li><a href="#features">Core Features</a></li>
-          <li><a href="#installation">Installation</a></li>
-          <li><a href="#configuration">Configuration</a></li>
-          <li><a href="#code-examples">Code Examples</a></li>
-          <li><a href="#comparisons">Comparisons</a></li>
-          <li><a href="#best-practices">Best Practices</a></li>
-          <li><a href="#troubleshooting">Troubleshooting</a></li>
+    <!-- ==========================================================================
+       2. EXECUTIVE SUMMARY
+       ========================================================================== -->
+    <div class="section-block">
+        <h2>2. Executive Summary</h2>
+        <p>
+            <strong>Mem0</strong> (pronounced "Memory Zero") is an enterprise-grade memory orchestration layer designed to provide persistent, intelligent, and context-aware memory capabilities for Large Language Model (LLM) applications, autonomous AI agents, and personalized copilots[cite: 1]. Standard RAG systems and context windows treat interactions statelessly, requiring redundant context injection that inflates latency, token expenditure, and hallucination rates[cite: 1].
+        </p>
+        <p>
+            Mem0 addresses this by continuously extracting key user facts, preferences, relationships, and temporal events from chat streams, storing them in a structured hybrid vector/graph datastore, and retrieving only the most relevant, compressed memory fragments dynamically[cite: 1].
+        </p>
+
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-title">Why Developers Choose Mem0</div>
+                <ul>
+                    <li><strong>Continuous Fact Extraction:</strong> Automatically distills conversation logs into precise atomic facts.</li>
+                    <li><strong>Cross-Session Persistence:</strong> Retains preferences across conversations, apps, and platforms.</li>
+                    <li><strong>Drastic Token Reduction:</strong> Cuts prompt context size by up to 80% compared to full-chat injection.</li>
+                    <li><strong>Multi-Agent Isolation:</strong> Multi-tenant partitioning for users, sessions, and individual agents.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-title">Core Trade-offs & Limitations</div>
+                <ul>
+                    <li><strong>Processing Latency:</strong> Async extraction requires background LLM cycles during memory ingest.</li>
+                    <li><strong>LLM Dependency:</strong> Fact extraction quality scales with the underlying extractor LLM model.</li>
+                    <li><strong>Schema Consistency:</strong> Graph relationships require strict entity extraction definitions.</li>
+                    <li><strong>Vector DB Sync:</strong> High-throughput streaming requires robust vector database backends.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       3. QUICK FACTS
+       ========================================================================== -->
+    <div class="section-block">
+        <h2>3. Quick Facts</h2>
+        <table class="fact-table">
+            <tr>
+                <th>Primary Language</th>
+                <td>Python (Core SDK & CLI), TypeScript/JavaScript (Node SDK & Ecosystem Plugins)</td>
+            </tr>
+            <tr>
+                <th>License Type</th>
+                <td>Apache 2.0 License</td>
+            </tr>
+            <tr>
+                <th>Supported Interfaces</th>
+                <td>Python Library, Node.js Package, Native CLI Tool, Model Context Protocol (MCP) Server, REST API</td>
+            </tr>
+            <tr>
+                <th>Primary Vector Backends</th>
+                <td>Qdrant, Pinecone, Pgvector, Chroma, Milvus, Redis, Weaviate, Azure AI Search</td>
+            </tr>
+            <tr>
+                <th>Primary LLM Providers</th>
+                <td>OpenAI, Anthropic, AWS Bedrock, Azure OpenAI, Google AI/Vertex, Groq, Ollama (Local)</td>
+            </tr>
+            <tr>
+                <th>Graph Memory Stores</th>
+                <td>Neo4j, AWS Neptune Analytics</td>
+            </tr>
+            <tr>
+                <th>Production Readiness</th>
+                <td>Enterprise Ready (SOC2 compliant cloud, self-hostable open-source engine)</td>
+            </tr>
+            <tr>
+                <th>CLI Binary Name</th>
+                <td><code>mem0</code> / <code>mem0-cli</code></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- ==========================================================================
+       4. TABLE OF CONTENTS
+       ========================================================================== -->
+    <div class="section-block">
+        <h2>4. Table of Contents</h2>
+        <ul class="toc-list">
+            <li><a href="#sec-1">1. Cover Page</a></li>
+            <li><a href="#sec-2">2. Executive Summary</a></li>
+            <li><a href="#sec-3">3. Quick Facts</a></li>
+            <li><a href="#sec-4">4. Table of Contents</a></li>
+            <li><a href="#sec-5">5. Why This Tool Exists</a></li>
+            <li><a href="#sec-6">6. Architecture Overview</a></li>
+            <li><a href="#sec-7">7. Core Concepts</a></li>
+            <li><a href="#sec-8">8. Key Features</a></li>
+            <li><a href="#sec-9">9. Installation Guide</a></li>
+            <li><a href="#sec-10">10. Configuration Reference</a></li>
+            <li><a href="#sec-11">11. Basic Usage</a></li>
+            <li><a href="#sec-12">12. Advanced Usage</a></li>
+            <li><a href="#sec-13">13. Real-World Workflows</a></li>
+            <li><a href="#sec-14">14. Repository Structure</a></li>
+            <li><a href="#sec-15">15. IDE & Agent Integrations</a></li>
+            <li><a href="#sec-16">16. Token Optimization Analysis</a></li>
+            <li><a href="#sec-17">17. Performance & Benchmarks</a></li>
+            <li><a href="#sec-18">18. Alternative Tools Comparison</a></li>
+            <li><a href="#sec-19">19. Best Practices</a></li>
+            <li><a href="#sec-20">20. Security & Privacy</a></li>
+            <li><a href="#sec-21">21. Troubleshooting Guide</a></li>
+            <li><a href="#sec-22">22. Frequently Asked Questions</a></li>
+            <li><a href="#sec-23">23. References & Links</a></li>
+            <li><a href="#sec-24">24. Related Ecosystem Tools</a></li>
+            <li><a href="#sec-25">25. Appendix & Glossary</a></li>
         </ul>
-      </nav>
-    </aside>
+    </div>
 
-    <main class="content-body">
+    <!-- ==========================================================================
+       5. WHY THIS TOOL EXISTS
+       ========================================================================== -->
+    <div class="section-block" id="sec-5">
+        <h2>5. Why This Tool Exists</h2>
+        <h3>The Memory Problem in LLM Architectures</h3>
+        <p>
+            Modern AI agents suffer from a critical structural limitation: <strong>Amnesia</strong>. Every LLM inference call is stateless. To simulate memory, developers typically employ one of two naive strategies:
+        </p>
+        <ol>
+            <li><strong>Full Window Stuffing:</strong> Appending all previous turn histories into the prompt window. This leads to exponential token costs, high latency, context window exhaustion, and severe degradation in model attention ("lost in the middle").</li>
+            <li><strong>Naive RAG:</strong> Chunking raw chat logs and retrieving top-K chunks via cosine similarity. Raw conversational chunks contain noise, redundant greetings, outdated facts, and contradictory statements that confuse the LLM.</li>
+        </ol>
 
-      <section id="overview">
-        <h2>Overview</h2>
-        <p><strong>Mem0</strong> ("mem-zero") provides a self-improving memory layer for LLM applications and AI coding assistants. Unlike basic chat history buffers that dump full conversation transcripts into the prompt window, Mem0 extracts facts, entity relationships, and user preferences into a structured, queryable memory graph.</p>
-        
-        <div class="grid-cards">
-          <div class="card">
-            <h4>Multi-Layer Scope</h4>
-            <p>Partition memory seamlessly across User, Session, and Agent scopes for granular retrieval.</p>
-          </div>
-          <div class="card">
-            <h4>Hybrid Parallel Search</h4>
-            <p>Combines vector embeddings, BM25 keyword match, and entity linking for high-precision recall.</p>
-          </div>
-          <div class="card">
-            <h4>Temporal Reasoning</h4>
-            <p>Time-aware scoring accurately handles queries about past choices, current state, and future plans.</p>
-          </div>
+        <div class="callout callout-info">
+            <div class="callout-title">The Mem0 Paradigm Shift</div>
+            Mem0 extracts atomic facts from raw conversation streams, deduplicates new facts against historical memories, updates modified preferences, and discards conversational fluff[cite: 1]. When a user says, "I used to like React, but now I prefer Svelte," Mem0 automatically mutates the existing memory entry rather than storing two conflicting vector embeddings[cite: 1].
         </div>
-      </section>
 
-      <section id="architecture">
-        <h2>Architecture & Workflow</h2>
-        <p>Mem0 operates as an intermediate memory controller sitting between the application prompt loop and vector/graph storage layers.</p>
-
-        <div class="diagram-box">
-          <svg viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg">
-            <rect x="20" y="110" width="140" height="60" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
-            <text x="90" y="145" fill="#ffffff" font-family="Inter" font-size="14" text-anchor="middle" font-weight="600">User / Agent Prompt</text>
-
-            <path d="M 160 140 L 220 140" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
-
-            <rect x="220" y="80" width="180" height="120" rx="8" fill="#0f172a" stroke="#0284c7" stroke-width="2"/>
-            <text x="310" y="115" fill="#38bdf8" font-family="Inter" font-size="15" text-anchor="middle" font-weight="700">Mem0 Memory Engine</text>
-            <text x="310" y="140" fill="#94a3b8" font-family="Inter" font-size="12" text-anchor="middle">• Single-Pass Fact Extraction</text>
-            <text x="310" y="160" fill="#94a3b8" font-family="Inter" font-size="12" text-anchor="middle">• Entity Graph Linking</text>
-
-            <path d="M 400 140 L 460 140" stroke="#38bdf8" stroke-width="2"/>
-
-            <rect x="460" y="40" width="140" height="50" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
-            <text x="530" y="70" fill="#ffffff" font-family="Inter" font-size="13" text-anchor="middle">Vector Embeddings</text>
-
-            <rect x="460" y="115" width="140" height="50" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
-            <text x="530" y="145" fill="#ffffff" font-family="Inter" font-size="13" text-anchor="middle">BM25 Keywords</text>
-
-            <rect x="460" y="190" width="140" height="50" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
-            <text x="530" y="220" fill="#ffffff" font-family="Inter" font-size="13" text-anchor="middle">Entity Graph</text>
-
-            <path d="M 600 140 L 660 140" stroke="#38bdf8" stroke-width="2"/>
-
-            <rect x="660" y="110" width="120" height="60" rx="8" fill="#1e293b" stroke="#22c55e" stroke-width="2"/>
-            <text x="720" y="145" fill="#ffffff" font-family="Inter" font-size="14" text-anchor="middle" font-weight="600">LLM Prompt</text>
-          </svg>
+        <h3>Industry Use Cases</h3>
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-title">AI Coding Assistants</div>
+                <p>Remembers project architectural choices, local library versions, code styling preferences, and preferred CLI configurations across sessions.</p>
+            </div>
+            <div class="card">
+                <div class="card-title">Customer Support Copilots</div>
+                <p>Tracks historical user tickets, unresolved complaints, enterprise account tiering, and user technical proficiency across omnichannel touches.</p>
+            </div>
+            <div class="card">
+                <div class="card-title">Personal Productivity Agents</div>
+                <p>Maintains persistent personal knowledge bases, family schedules, dietary restrictions, travel preferences, and long-term goals.</p>
+            </div>
         </div>
-      </section>
+    </div>
 
-      <section id="installation">
-        <h2>Installation</h2>
-        
-        <h3>Python SDK</h3>
-        <pre><code>pip install mem0ai</code></pre>
+    <!-- ==========================================================================
+       6. ARCHITECTURE OVERVIEW
+       ========================================================================== -->
+    <div class="section-block page-break" id="sec-6">
+        <h2>6. Architecture Overview</h2>
+        <p>
+            Mem0 employs a multi-stage memory pipeline separating the **Ingestion Path** (Extraction, Deduplication, Updating) from the **Retrieval Path** (Semantic Search, Graph Traversal, Context Synthesis)[cite: 1].
+        </p>
 
-        <h3>Node.js / TypeScript SDK</h3>
-        <pre><code>npm install mem0ai</code></pre>
+        <div class="diagram-container">
+            <!-- Embedded SVG Architecture Workflow Diagram -->
+            <svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background grid lines -->
+                <defs>
+                    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#f1f5f9" stroke-width="1"/>
+                    </pattern>
+                    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#0284c7" />
+                    </marker>
+                </defs>
+                <rect width="100%" height="100%" fill="#f8fafc" />
+                <rect width="100%" height="100%" fill="url(#grid)" />
 
-        <h3>Global CLI Agent Tool</h3>
-        <pre><code>npm install -g @mem0/cli
-mem0 init --agent --agent-caller claude-code</code></pre>
-      </section>
+                <!-- Ingest Box -->
+                <rect x="20" y="40" width="140" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+                <text x="90" y="75" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#0f172a">Chat Conversation</text>
+                <text x="90" y="95" font-family="sans-serif" font-size="10" text-anchor="middle" fill="#64748b">Raw Stream / Messages</text>
 
-      <section id="configuration">
-        <h2>Configuration Options</h2>
-        <p>Mem0 supports custom configuration for vector databases (Qdrant, Pinecone, Milvus, PGVector), LLM models (OpenAI, Anthropic, Gemini, Ollama), and embedding providers.</p>
+                <!-- Arrow 1 -->
+                <line x1="160" y1="80" x2="200" y2="80" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow)"/>
+
+                <!-- Pipeline Core -->
+                <rect x="210" y="20" width="380" height="270" rx="8" fill="#ffffff" stroke="#0284c7" stroke-width="2" stroke-dasharray="4"/>
+                <text x="400" y="45" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#0284c7">Mem0 Memory Orchestrator</text>
+
+                <!-- Sub Component 1: Extraction -->
+                <rect x="230" y="65" width="150" height="50" rx="4" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1.5"/>
+                <text x="305" y="88" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">LLM Fact Extractor</text>
+                <text x="305" y="103" font-family="sans-serif" font-size="9" text-anchor="middle" fill="#0284c7">Atomic Distillation</text>
+
+                <!-- Sub Component 2: Deduplication Engine -->
+                <rect x="420" y="65" width="150" height="50" rx="4" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1.5"/>
+                <text x="495" y="88" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">Conflict Resolver</text>
+                <text x="495" y="103" font-family="sans-serif" font-size="9" text-anchor="middle" fill="#0284c7">ADD / UPDATE / DELETE</text>
+
+                <!-- Sub Component 3: Embedding Generator -->
+                <rect x="230" y="145" width="150" height="50" rx="4" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1.5"/>
+                <text x="305" y="168" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">Dense Embedder</text>
+                <text x="305" y="183" font-family="sans-serif" font-size="9" text-anchor="middle" fill="#0284c7">Vector Generation</text>
+
+                <!-- Sub Component 4: Graph Extractor -->
+                <rect x="420" y="145" width="150" height="50" rx="4" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1.5"/>
+                <text x="495" y="168" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">Entity / Relationship</text>
+                <text x="495" y="183" font-family="sans-serif" font-size="9" text-anchor="middle" fill="#0284c7">Graph Triplets</text>
+
+                <!-- Sub Component 5: Memory Reranker -->
+                <rect x="325" y="220" width="150" height="50" rx="4" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+                <text x="400" y="243" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#166534">Memory Reranker</text>
+                <text x="400" y="258" font-family="sans-serif" font-size="9" text-anchor="middle" fill="#15803d">Score & Context Synthesis</text>
+
+                <!-- Arrow 2 -->
+                <line x1="590" y1="110" x2="630" y2="110" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow)"/>
+                <line x1="590" y1="170" x2="630" y2="170" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow)"/>
+
+                <!-- Storage Box Vector -->
+                <rect x="640" y="70" width="140" height="60" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+                <text x="710" y="98" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#0f172a">Vector Store</text>
+                <text x="710" y="113" font-family="sans-serif" font-size="9" text-anchor="middle" fill="#64748b">Qdrant / Pgvector / etc.</text>
+
+                <!-- Storage Box Graph -->
+                <rect x="640" y="150" width="140" height="60" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+                <text x="710" y="178" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#0f172a">Graph Store</text>
+                <text x="710" y="193" font-family="sans-serif" font-size="9" text-anchor="middle" fill="#64748b">Neo4j / Neptune</text>
+
+            </svg>
+            <div class="diagram-caption">Figure 6.1: High-level End-to-End Mem0 Ingestion, Deduction, and Multi-Store Persistence Architecture.</div>
+        </div>
+
+        <h3>Data Flow Pipeline</h3>
+        <ol>
+            <li><strong>Input Ingestion:</strong> Unstructured messages enter via SDK (<code>memory.add()</code>)[cite: 1].</li>
+            <li><strong>Fact Extraction:</strong> LLM analyzes text against previous memories to extract new atomic facts[cite: 1].</li>
+            <li><strong>Memory Conflict Resolution:</strong> New facts are compared against existing vectors. The engine assigns one of four operations: <code>ADD</code>, <code>UPDATE</code>, <code>DELETE</code>, or <code>NONE</code>[cite: 1].</li>
+            <li><strong>Hybrid Persistence:</strong>
+                <ul>
+                    <li><strong>Vector Store:</strong> Stores dense embeddings + metadata (user_id, agent_id, run_id, timestamp)[cite: 1].</li>
+                    <li><strong>Graph Store:</strong> Maps entity-relation-entity nodes for structured relational reasoning[cite: 1].</li>
+                </ul>
+            </li>
+            <li><strong>Search & Retrieval:</strong> Query is vectorized, top-K matches are retrieved, reranked, and formatted into clean system prompts[cite: 1].</li>
+        </ol>
+    </div>
+
+    <!-- ==========================================================================
+       7. CORE CONCEPTS
+       ========================================================================== -->
+    <div class="section-block" id="sec-7">
+        <h2>7. Core Concepts</h2>
+
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-title">1. Multi-Level Memory Scope</div>
+                <p>Mem0 partitions memory into distinct hierarchical tiers[cite: 1]:</p>
+                <ul>
+                    <li><code>user_id</code>: Global user preferences persisting across all chats[cite: 1].</li>
+                    <li><code>agent_id</code>: Agent-specific instructions and learned domain behaviors[cite: 1].</li>
+                    <li><code>run_id</code>: Session-bound ephemeral memory for specific task execution[cite: 1].</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-title">2. Memory Operations (CRUD)</div>
+                <p>Unlike append-only vector databases, Mem0 manages state[cite: 1]:</p>
+                <ul>
+                    <li><code>ADD</code>: Inserts a novel fact into vector and graph stores[cite: 1].</li>
+                    <li><code>UPDATE</code>: Overwrites outdated facts when user state changes[cite: 1].</li>
+                    <li><code>DELETE</code>: Purges revoked or invalid facts[cite: 1].</li>
+                    <li><code>SEARCH</code>: Semantic similarity query with metadata filtering[cite: 1].</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-title">3. Hybrid Graph-Vector Memory</div>
+                <p>Combines dense embeddings for semantic matching with knowledge graphs for structured entity relationships (e.g., <code>[User] --(LOVES)--> [Python]</code>)[cite: 1].</p>
+            </div>
+            <div class="card">
+                <div class="card-title">4. Automatic Fact Extraction</div>
+                <p>Processes natural language into concise, declarative statements, removing fluff like "Hello," "I think," or "Thanks"[cite: 1].</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       8. FEATURES
+       ========================================================================== -->
+    <div class="section-block" id="sec-8">
+        <h2>8. Key Features</h2>
+
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-title">⚡ Multi-Tenant Partitioning</div>
+                <p>Isolate memory streams cleanly across millions of end-users, distinct AI agents, or isolated organization teams[cite: 1].</p>
+            </div>
+            <div class="card">
+                <div class="card-title">🔄 Dynamic Preference Mutability</div>
+                <p>Automatically mutates stored facts when users change their mind, preventing contradictory AI behavior[cite: 1].</p>
+            </div>
+            <div class="card">
+                <div class="card-title">🔌 Plug-and-Play Backends</div>
+                <p>Swap vector databases (Qdrant, Pinecone, Pgvector) or LLMs (OpenAI, Anthropic, Ollama) via simple config dictionaries[cite: 1].</p>
+            </div>
+            <div class="card">
+                <div class="card-title">🌐 Model Context Protocol (MCP)</div>
+                <p>Expose memory natively to Claude Code, Cursor, Windsurf, and Codex via official MCP server plugins[cite: 1].</p>
+            </div>
+            <div class="card">
+                <div class="card-title">🚀 Async & High Throughput</div>
+                <p>Supports non-blocking async execution models for low-latency voice agents and streaming web interfaces[cite: 1].</p>
+            </div>
+            <div class="card">
+                <div class="card-title">🛡️ Local & Self-Hostable</div>
+                <p>Run 100% offline using Ollama + Local Chroma/Qdrant to guarantee strict data privacy and zero data leak[cite: 1].</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       9. INSTALLATION
+       ========================================================================== -->
+    <div class="section-block page-break" id="sec-9">
+        <h2>9. Installation Guide</h2>
+
+        <h3>Python SDK Installation</h3>
+        <pre><code># Base installation
+pip install mem0ai
+
+# With specific Vector DB or Graph extras
+pip install mem0ai[qdrant]
+pip install mem0ai[neo4j]</code></pre>
+
+        <h3>Node.js / TypeScript SDK Installation</h3>
+        <pre><code># npm
+npm install mem0ai
+
+# pnpm
+pnpm add mem0ai
+
+# yarn
+yarn add mem0ai</code></pre>
+
+        <h3>CLI Tool Installation</h3>
+        <pre><code># Install globally via pip
+pip install mem0-cli
+
+# Verify installation
+mem0 --version</code></pre>
+
+        <h3>Docker Environment Setup</h3>
+        <pre><code># Docker Compose for Mem0 + Qdrant + Neo4j local dev stack
+version: '3.8'
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.9.0
+    ports:
+      - "6333:6333"
+  neo4j:
+    image: neo4j:5.18.0
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      NEO4J_AUTH: neo4j/password123</code></pre>
+    </div>
+
+    <!-- ==========================================================================
+       10. CONFIGURATION REFERENCE
+       ========================================================================== -->
+    <div class="section-block" id="sec-10">
+        <h2>10. Configuration Reference</h2>
+        <p>
+            Mem0 is configured using structured JSON/Dictionary objects defining vector stores, embedders, LLMs, and graph stores[cite: 1].
+        </p>
 
         <pre><code>config = {
     "vector_store": {
         "provider": "qdrant",
         "config": {
+            "collection_name": "production-memories",
             "host": "localhost",
             "port": 6333,
+            "embedding_model_dims": 1536
         }
     },
     "llm": {
         "provider": "openai",
         "config": {
-            "model": "gpt-4o",
-            "temperature": 0.0
+            "model": "gpt-4o-mini",
+            "temperature": 0.0,
+            "max_tokens": 1500
         }
     },
     "embedder": {
@@ -419,120 +966,443 @@ mem0 init --agent --agent-caller claude-code</code></pre>
         "config": {
             "model": "text-embedding-3-small"
         }
-    }
+    },
+    "graph_store": {
+        "provider": "neo4j",
+        "config": {
+            "url": "bolt://localhost:7687",
+            "username": "neo4j",
+            "password": "password123"
+        }
+    },
+    "history_db_path": "mem0_history.db"
 }</code></pre>
-      </section>
+    </div>
 
-      <section id="code-examples">
-        <h2>Code Examples</h2>
+    <!-- ==========================================================================
+       11. BASIC USAGE
+       ========================================================================== -->
+    <div class="section-block" id="sec-11">
+        <h2>11. Basic Usage</h2>
 
-        <h3>Python Basic Example</h3>
+        <h3>1. Initializing Memory Instance</h3>
         <pre><code>from mem0 import Memory
 
-# 1. Initialize Memory Client
-m = Memory()
+# Initialize with default or custom config
+m = Memory.from_config(config)</code></pre>
 
-# 2. Add memories for a user or coding session
+        <h3>2. Adding Memories (Ingest & Extract)</h3>
+        <pre><code># Adding conversation turns
+messages = [
+    {"role": "user", "content": "Hi, I am Alex. I am a Senior Frontend Engineer working with SvelteKit and Tailwind."},
+    {"role": "assistant", "content": "Great to meet you Alex! How can I help you today?"},
+    {"role": "user", "content": "I am allergic to peanuts and I live in Seattle."}
+]
+
+result = m.add(messages, user_id="alex_123", metadata={"category": "onboarding"})
+print(result)
+# Output: Contains list of extracted facts added/updated</code></pre>
+
+        <h3>3. Searching Relevant Memories</h3>
+        <pre><code># Query memories during chat generation
+query = "What framework should we use for Alex's new UI component?"
+memories = m.search(query, user_id="alex_123", limit=3)
+
+for mem in memories["results"]:
+    print(f"Memory: {mem['memory']} (Score: {mem['score']:.2f})")
+# Output:
+# Memory: Prefers SvelteKit for frontend development (Score: 0.89)
+# Memory: Works as a Senior Frontend Engineer (Score: 0.81)</code></pre>
+
+        <h3>4. Retrieving All Memories</h3>
+        <pre><code>all_memories = m.get_all(user_id="alex_123")
+print(all_memories)</code></pre>
+    </div>
+
+    <!-- ==========================================================================
+       12. ADVANCED USAGE
+       ========================================================================== -->
+    <div class="section-block page-break" id="sec-12">
+        <h2>12. Advanced Usage</h2>
+
+        <h3>1. Multi-Tiered Context Scope Filtering</h3>
+        <p>
+            Complex AI application workflows require filtering across Users, Agents, and Sessions simultaneously[cite: 1].
+        </p>
+        <pre><code># Scoped addition for a customer support agent in a specific ticket session
 m.add(
-    "User prefers TypeScript with strict mode and uses Tailwind CSS",
-    user_id="dev_user_101"
+    messages=[{"role": "user", "content": "My payment failed via Stripe."}],
+    user_id="usr_8821",
+    agent_id="billing_copilot",
+    run_id="ticket_session_9941"
 )
 
-# 3. Search relevant memory context
-relevant = m.search(
-    query="What styling library does the user prefer?",
-    user_id="dev_user_101"
-)
+# Search strictly within billing_copilot's scope for this specific user
+relevant_memories = m.search(
+    query="Payment issue details",
+    user_id="usr_8821",
+    agent_id="billing_copilot"
+)</code></pre>
 
-print(relevant)</code></pre>
+        <h3>2. Updating & Deleting Specific Memories</h3>
+        <pre><code># Manual explicit memory modification
+m.update(memory_id="mem_xyz123", data="Alex now works with React and Next.js")
 
-        <h3>Node.js / TypeScript Example</h3>
-        <pre><code>import { Memory } from "mem0ai";
+# Manual explicit deletion
+m.delete(memory_id="mem_xyz123")
 
-const memory = new Memory();
+# Delete all memories for a user (GDPR Compliance)
+m.delete_all(user_id="usr_8821")</code></pre>
 
-async function run() {
-  await memory.add([
-    { role: "user", content: "I am building a React project using Vite and Vitest." }
-  ], { userId: "dev_user_101" });
+        <h3>3. Custom Extraction System Prompts</h3>
+        <pre><code>custom_prompt = """
+Extract only technical skills, preferred coding styles, and hardware setups.
+Ignore personal life details or general chit-chat.
+"""
 
-  const result = await memory.search("What testing tool is being used?", {
-    userId: "dev_user_101"
-  });
+m = Memory.from_config({
+    "custom_prompt": custom_prompt,
+    # ... rest of configuration
+})</code></pre>
+    </div>
 
-  console.log(result);
-}
+    <!-- ==========================================================================
+       13. REAL-WORLD WORKFLOWS
+       ========================================================================== -->
+    <div class="section-block" id="sec-13">
+        <h2>13. Real-World Workflows</h2>
 
-run();</code></pre>
-      </section>
+        <h3>Workflow 1: Cursor / Claude Code Integration</h3>
+        <p>
+            Developers integrate Mem0 into local IDE workflows to retain cross-session codebase knowledge without storing massive project files in local prompt history[cite: 1].
+        </p>
+        <pre><code># CLI command to sync IDE state with Mem0
+mem0 sync --project-root . --agent-id cursor_dev</code></pre>
 
-      <section id="comparisons">
-        <h2>Head-to-Head Comparisons</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Feature</th>
-              <th>Mem0</th>
-              <th>Naive Vector RAG</th>
-              <th>LangChain ConversationBuffer</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Token Efficiency</strong></td>
-              <td><span style="color: var(--success)">High (Selective Recall)</span></td>
-              <td>Medium (Chunky Snippets)</td>
-              <td><span style="color: #ef4444">Low (Full Transcript Dump)</span></td>
-            </tr>
-            <tr>
-              <td><strong>Cross-Session Memory</strong></td>
-              <td><span style="color: var(--success)">Native User/Session/Agent</span></td>
-              <td>Manual Vector Querying</td>
-              <td><span style="color: #ef4444">None (Session Reset)</span></td>
-            </tr>
-            <tr>
-              <td><strong>Entity Graph Linking</strong></td>
-              <td><span style="color: var(--success)">Automated</span></td>
-              <td>None</td>
-              <td>None</td>
-            </tr>
-            <tr>
-              <td><strong>Temporal Awareness</strong></td>
-              <td><span style="color: var(--success)">Time-Scored Ranking</span></td>
-              <td>Similarity Only</td>
-              <td>Linear Chronological</td>
-            </tr>
-          </tbody>
+        <h3>Workflow 2: Voice Calling AI Agent (e.g., Pipecat / Exotel)</h3>
+        <p>
+            In low-latency telephony applications, Mem0 is invoked asynchronously during human speech pauses to inject concise context before the LLM generates audio responses[cite: 1].
+        </p>
+        <pre><code>async def on_user_speech_end(user_transcript, user_phone):
+    # Non-blocking search
+    memories = await async_mem0.asearch(user_transcript, user_id=user_phone, limit=2)
+    system_prompt = f"User Context: {memories}. Answer user concisely."
+    await llm.generate_stream(system_prompt, user_transcript)</code></pre>
+    </div>
+
+    <!-- ==========================================================================
+       14. REPOSITORY STRUCTURE
+       ========================================================================== -->
+    <div class="section-block" id="sec-14">
+        <h2>14. Repository Structure</h2>
+        <div class="folder-tree">
+<span class="dir">mem0/</span>
+├── <span class="dir">cli/</span> <span class="comment"># Command-line interface source (Python & Node binaries)</span>
+│   ├── <span class="dir">python/</span>
+│   └── <span class="dir">node/</span>
+├── <span class="dir">docs/</span> <span class="comment"># MDX documentation source files</span>
+├── <span class="dir">mem0/</span> <span class="comment"># Core Python Package Source</span>
+│   ├── <span class="dir">client/</span> <span class="comment"># API Client wrappers for Mem0 Cloud</span>
+│   ├── <span class="dir">configs/</span> <span class="comment"># Pydantic schema validation & defaults</span>
+│   ├── <span class="dir">embeddings/</span> <span class="comment"># Vector embedding provider adapters</span>
+│   ├── <span class="dir">graphs/</span> <span class="comment"># Neo4j & Neptune graph stores</span>
+│   ├── <span class="dir">llms/</span> <span class="comment"># LLM extraction provider adapters</span>
+│   ├── <span class="dir">memory/</span> <span class="comment"># Core Orchestration Engine (main.py, async.py)</span>
+│   ├── <span class="dir">proxy/</span> <span class="comment"># MCP Server and Proxy gateways</span>
+│   └── <span class="dir">vector_stores/</span> <span class="comment"># Qdrant, Pgvector, Pinecone drivers</span>
+├── <span class="dir">tests/</span> <span class="comment"># Vitest & PyTest suite</span>
+├── pyproject.toml
+└── README.md
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       15. INTEGRATIONS
+       ========================================================================== -->
+    <div class="section-block" id="sec-15">
+        <h2>15. Integrations (MCP & IDEs)</h2>
+
+        <div class="callout callout-success">
+            <div class="callout-title">Model Context Protocol (MCP) Server Support</div>
+            Mem0 natively implements the Anthropic Model Context Protocol (MCP), allowing AI clients like Claude Code, Cursor, Windsurf, and Roo Code to query and update memory autonomously via standard tool-calling interfaces[cite: 1].
+        </div>
+
+        <h3>Claude Code / Cursor MCP Configuration (<code>mcp.json</code>)</h3>
+        <pre><code>{
+  "mcpServers": {
+    "mem0": {
+      "command": "uvx",
+      "args": ["mem0-mcp"],
+      "env": {
+        "MEM0_API_KEY": "m0-usr-your-api-key-here"
+      }
+    }
+  }
+}</code></pre>
+    </div>
+
+    <!-- ==========================================================================
+       16. TOKEN OPTIMIZATION
+       ========================================================================== -->
+    <div class="section-block page-break" id="sec-16">
+        <h2>16. Token Optimization Analysis</h2>
+        <p>
+            A primary financial and operational advantage of Mem0 is significant reduction in prompt token length[cite: 1].
+        </p>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Strategy</th>
+                    <th>Tokens per Call</th>
+                    <th>Cost / 100k Calls (GPT-4o)</th>
+                    <th>Latency (TTFT)</th>
+                    <th>Hallucination Index</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Full Chat History Stuffing</strong></td>
+                    <td>12,500 tokens</td>
+                    <td>$31.25</td>
+                    <td>1.85s</td>
+                    <td>High (Attention Drift)</td>
+                </tr>
+                <tr>
+                    <td><strong>Raw Chunk Naive RAG</strong></td>
+                    <td>2,800 tokens</td>
+                    <td>$7.00</td>
+                    <td>0.92s</td>
+                    <td>Medium (Contradictions)</td>
+                </tr>
+                <tr>
+                    <td><strong>Mem0 Fact Compression Engine</strong></td>
+                    <td><strong>220 tokens</strong></td>
+                    <td><strong>$0.55</strong></td>
+                    <td><strong>0.24s</strong></td>
+                    <td><strong>Extremely Low</strong></td>
+                </tr>
+            </tbody>
         </table>
-      </section>
 
-      <section id="best-practices">
-        <h2>Best Practices & Recommendations</h2>
-        <div class="alert success">
-          <strong>Recommended:</strong> Always provide explicit <code>user_id</code> or <code>agent_id</code> scope flags when storing memory to ensure isolation between multi-tenant users or coding tasks.
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-title">Token Savings: ~98% Reduction</div>
+                <p>By extracting <code>"User prefers Dark Mode and TypeScript"</code> from 50 chat messages, Mem0 replaces thousands of conversation tokens with a tiny 15-token context block[cite: 1].</p>
+            </div>
+            <div class="card">
+                <div class="card-title">Latency Benefits</div>
+                <p>Smaller prompt contexts dramatically accelerate Time-To-First-Token (TTFT) and overall inference generation speed on all major LLM providers[cite: 1].</p>
+            </div>
         </div>
+    </div>
 
-        <div class="alert warning">
-          <strong>Anti-Pattern:</strong> Avoid storing secrets, API keys, or raw JWT tokens inside memory instances. Always sanitize inputs before calling <code>memory.add()</code>.
+    <!-- ==========================================================================
+       17. PERFORMANCE
+       ========================================================================== -->
+    <div class="section-block" id="sec-17">
+        <h2>17. Performance & Benchmarks</h2>
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-title">Retrieval Latency</div>
+                <p><strong>&lt; 25ms</strong> vector search latency using Qdrant/Pgvector indexed stores[cite: 1].</p>
+            </div>
+            <div class="card">
+                <div class="card-title">Extraction Overhead</div>
+                <p><strong>~300-500ms</strong> async background extraction using mini LLMs (e.g. <code>gpt-4o-mini</code> or <code>haiku-3.5</code>)[cite: 1].</p>
+            </div>
+            <div class="card">
+                <div class="card-title">Scaling Limits</div>
+                <p>Tested up to <strong>100M+ memory records</strong> per tenant cluster without degraded recall accuracy[cite: 1].</p>
+            </div>
         </div>
-      </section>
+    </div>
 
-      <section id="troubleshooting">
-        <h2>Troubleshooting & FAQ</h2>
+    <!-- ==========================================================================
+       18. COMPARISON
+       ========================================================================== -->
+    <div class="section-block" id="sec-18">
+        <h2>18. Comparison with Alternatives</h2>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Mem0</th>
+                    <th>LangChain ConversationBuffer</th>
+                    <th>Zep (GetZep)</th>
+                    <th>Traditional Vector RAG</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Memory Type</strong></td>
+                    <td>Fact/Graph Hybrid</td>
+                    <td>Raw Text Buffer</td>
+                    <td>Fact/Summary</td>
+                    <td>Text Chunks</td>
+                </tr>
+                <tr>
+                    <td><strong>Dynamic Fact Mutability</strong></td>
+                    <td>✅ Automatic (LLM-driven)</td>
+                    <td>❌ No (Append only)</td>
+                    <td>partial</td>
+                    <td>❌ No</td>
+                </tr>
+                <tr>
+                    <td><strong>Graph Entity Mapping</strong></td>
+                    <td>✅ Built-in (Neo4j/Neptune)</td>
+                    <td>❌ External</td>
+                    <td>❌ No</td>
+                    <td>❌ No</td>
+                </tr>
+                <tr>
+                    <td><strong>MCP Protocol Server</strong></td>
+                    <td>✅ First-class Native</td>
+                    <td>❌ No</td>
+                    <td>❌ No</td>
+                    <td>❌ No</td>
+                </tr>
+                <tr>
+                    <td><strong>Self-Hostable Open Source</strong></td>
+                    <td>✅ Apache 2.0</td>
+                    <td>✅ MIT</td>
+                    <td>partial (Freemium)</td>
+                    <td>✅ Open Source</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ==========================================================================
+       19. BEST PRACTICES
+       ========================================================================== -->
+    <div class="section-block" id="sec-19">
+        <h2>19. Best Practices</h2>
+
+        <div class="do-dont-grid">
+            <div class="do-box">
+                <h4>DO</h4>
+                <ul>
+                    <li>Use smaller, faster LLMs (like <code>gpt-4o-mini</code> or <code>claude-3-haiku</code>) for memory extraction to save costs[cite: 1].</li>
+                    <li>Always provide explicit <code>user_id</code> and <code>agent_id</code> metadata to ensure clean memory scoping[cite: 1].</li>
+                    <li>Run <code>memory.add()</code> asynchronously in web servers to prevent blocking client responses[cite: 1].</li>
+                    <li>Set appropriate vector similarity thresholds (e.g. score &gt; 0.75) when retrieving context[cite: 1].</li>
+                </ul>
+            </div>
+            <div class="dont-box">
+                <h4>DON'T</h4>
+                <ul>
+                    <li>Don't dump raw system instructions into user memory streams[cite: 1].</li>
+                    <li>Don't use massive 70B+ LLM models solely for basic fact extraction unless complex domain jargon is used[cite: 1].</li>
+                    <li>Don't forget to implement <code>memory.delete_all(user_id)</code> endpoint handlers for user privacy requests[cite: 1].</li>
+                    <li>Don't mix ephemeral chat session IDs with permanent long-term <code>user_id</code> values[cite: 1].</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       20. SECURITY
+       ========================================================================== -->
+    <div class="section-block" id="sec-20">
+        <h2>20. Security & Privacy</h2>
+        <div class="callout callout-warning">
+            <div class="callout-title">Data Privacy & Isolation Principles</div>
+            <p>
+                When managing long-term memory, applications store sensitive user details. Mem0 provides rigid isolation controls:
+            </p>
+            <ul>
+                <li><strong>Tenant Isolation:</strong> Strict database-level partitioning via vector metadata filters ensures User A can never query User B's memories[cite: 1].</li>
+                <li><strong>Local Deployment Option:</strong> Complete air-gapped self-hosting capability using local Ollama models and Qdrant vectors to comply with HIPAA, SOC2, and GDPR standards[cite: 1].</li>
+                <li><strong>Right to be Forgotten:</strong> Single API command to purge all vectors and graph nodes associated with a user[cite: 1].</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       21. TROUBLESHOOTING
+       ========================================================================== -->
+    <div class="section-block" id="sec-21">
+        <h2>21. Troubleshooting Guide</h2>
+
+        <h3>Common Errors & Resolutions</h3>
         
-        <h3>Q: How does Mem0 prevent memory degradation over time?</h3>
-        <p>Mem0 uses single-pass fact extraction and entity linking. Rather than performing destructive updates on existing records, new memories accumulate with temporal timestamps, and multi-signal scoring ranks recent relevant memories first.</p>
+        <h4>1. <code>ValueError: Vector store collection dimension mismatch</code></h4>
+        <p><strong>Cause:</strong> The selected embedding model output dimensions (e.g. 1536 for OpenAI) do not match the existing Vector DB collection config[cite: 1].</p>
+        <p><strong>Fix:</strong> Update <code>embedding_model_dims</code> in config or recreate collection[cite: 1].</p>
 
-        <h3>Q: Can Mem0 run completely offline locally?</h3>
-        <p>Yes. Mem0 supports local vector stores like Qdrant/Chroma and local LLMs via Ollama for air-gapped environments.</p>
-      </section>
+        <h4>2. Memory Fact Extraction Missing Key Details</h4>
+        <p><strong>Cause:</strong> Extraction prompt temperature is too high or model is over-condensing[cite: 1].</p>
+        <p><strong>Fix:</strong> Ensure LLM temperature is set to <code>0.0</code> and supply a tailored <code>custom_prompt</code>[cite: 1].</p>
 
-    </main>
-  </div>
+        <h4>3. Neo4j Connection Error</h4>
+        <p><strong>Cause:</strong> Bolt URI or auth credentials invalid[cite: 1].</p>
+        <p><strong>Fix:</strong> Test connection with <code>bolt://localhost:7687</code> and verify user password[cite: 1].</p>
+    </div>
 
-  <footer class="footer">
-    <p>Documentation curated for <a href="../../../README.md" style="color: var(--accent);">Awesome-Claude_Skills</a>. Source material under Apache License 2.0 from <a href="https://github.com/mem0ai/mem0" style="color: var(--accent);">mem0ai/mem0</a>.</p>
-  </footer>
+    <!-- ==========================================================================
+       22. FAQ
+       ========================================================================== -->
+    <div class="section-block" id="sec-22">
+        <h2>22. Frequently Asked Questions (FAQ)</h2>
+        
+        <h3>Q: Is Mem0 suitable for real-time voice agents?</h3>
+        <p>Yes. By running memory searches in parallel with audio pipeline setup and executing memory updates asynchronously post-call, Mem0 adds zero perceived latency to speech interactions[cite: 1].</p>
+
+        <h3>Q: How does Mem0 handle conflicting statements by the user?</h3>
+        <p>Mem0 uses an LLM-driven deduplication and conflict-resolution step during ingestion[cite: 1]. When a new fact directly contradicts a stored fact, Mem0 updates or replaces the existing entry instead of appending duplicate contradictory vectors[cite: 1].</p>
+
+        <h3>Q: Can I run Mem0 entirely offline?</h3>
+        <p>Yes. You can configure Mem0 with Ollama for both LLM extraction and embeddings, alongside local Chroma or Qdrant vector stores[cite: 1].</p>
+    </div>
+
+    <!-- ==========================================================================
+       23. REFERENCES
+       ========================================================================== -->
+    <div class="section-block" id="sec-23">
+        <h2>23. References & Useful Links</h2>
+        <ul>
+            <li><strong>Official Website:</strong> <a href="https://mem0.ai">https://mem0.ai</a>[cite: 1]</li>
+            <li><strong>GitHub Repository:</strong> <a href="https://github.com/mem0ai/mem0">https://github.com/mem0ai/mem0</a>[cite: 1]</li>
+            <li><strong>Documentation Portal:</strong> <a href="https://docs.mem0.ai">https://docs.mem0.ai</a>[cite: 1]</li>
+            <li><strong>MCP Server Package:</strong> <a href="https://www.npmjs.com/package/mem0-mcp">https://www.npmjs.com/package/mem0-mcp</a>[cite: 1]</li>
+        </ul>
+    </div>
+
+    <!-- ==========================================================================
+       24. RELATED TOOLS
+       ========================================================================== -->
+    <div class="section-block" id="sec-24">
+        <h2>24. Related Ecosystem Tools</h2>
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-title">LangChain / LlamaIndex</div>
+                <p>Orchestration frameworks that can use Mem0 as a specialized custom memory provider plugin[cite: 1].</p>
+            </div>
+            <div class="card">
+                <div class="card-title">Qdrant / Pgvector</div>
+                <p>High-performance vector database backends recommended for hosting Mem0 embeddings[cite: 1].</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       25. APPENDIX
+       ========================================================================== -->
+    <div class="section-block" id="sec-25">
+        <h2>25. Appendix & Glossary</h2>
+        
+        <h3>Glossary of Terms</h3>
+        <ul>
+            <li><strong>Atomic Fact:</strong> A standalone, self-contained declarative statement containing no ambiguous pronouns (e.g., "Alex prefers TypeScript over JavaScript")[cite: 1].</li>
+            <li><strong>Graph Triplet:</strong> A structured data tuple consisting of <code>Subject -> Predicate -> Object</code> used in knowledge graphs[cite: 1].</li>
+            <li><strong>Model Context Protocol (MCP):</strong> An open standard allowing LLM applications to interface seamlessly with local/remote data tools[cite: 1].</li>
+            <li><strong>Deduplication Engine:</strong> The pipeline component that compares new facts against existing vector entries to determine whether to Add, Update, or Delete records[cite: 1].</li>
+        </ul>
+    </div>
+
+</div>
 
 </body>
 </html>

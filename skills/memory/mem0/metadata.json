@@ -1,33 +1,374 @@
 {
-  "name": "Mem0",
-  "slug": "mem0",
-  "category": "memory",
-  "subCategory": "Agent Memory System",
-  "description": "The Memory Layer for Personalized AI: intelligent, multi-layer memory retention across users, sessions, and agents.",
-  "problemSolved": "Stateless LLM interactions, loss of past context and preferences across sessions, and context window inflation caused by repeating transcript histories.",
-  "supports": [
-    "Python",
-    "TypeScript",
-    "Node.js",
-    "CLI",
-    "Claude Code",
-    "Cursor",
-    "LangChain",
-    "LlamaIndex",
-    "CrewAI",
-    "AutoGen"
-  ],
-  "primaryLanguage": "Python",
-  "license": "Apache-2.0",
-  "repository": "https://github.com/mem0ai/mem0",
-  "documentation": "https://docs.mem0.ai",
-  "website": "https://mem0.ai",
-  "tags": [
-    "memory",
-    "rag",
-    "knowledge-graph",
-    "agent-state",
-    "personalization",
-    "llm-memory"
-  ]
+"general": {
+"name": "Mem0",
+"slug": "mem0",
+"shortDescription": "The Memory Layer for Personalized AI Applications, Autonomous Agents, and Enterprise LLM Workflows.",
+"description": "Mem0 (Memory Zero) provides an intelligent, self-improving memory layer that retains facts, user preferences, and cross-session context across LLM interactions, reducing token costs and context size while improving AI personalization.",
+"tagline": "The Memory Layer for AI Agents and Assistants",
+"category": "AI Infrastructure",
+"subCategory": "Memory Layer & Context Optimization",
+"repositoryType": "Open Source Library",
+"maturity": "Production Ready",
+"status": "Active",
+"featured": true
+},
+"identity": {
+"github": "[https://github.com/mem0ai/mem0](https://github.com/mem0ai/mem0)",
+"website": "[https://mem0.ai](https://mem0.ai)",
+"documentation": "[https://docs.mem0.ai](https://docs.mem0.ai)",
+"logo": "[https://docs.mem0.ai/favicon.svg](https://www.google.com/search?q=https://docs.mem0.ai/favicon.svg)",
+"banner": "[https://docs.mem0.ai/images/banner-sm.png](https://www.google.com/search?q=https://docs.mem0.ai/images/banner-sm.png)",
+"favicon": "[https://docs.mem0.ai/favicon.ico](https://www.google.com/search?q=https://docs.mem0.ai/favicon.ico)"
+},
+"repository": {
+"owner": "mem0ai",
+"organization": "mem0ai",
+"defaultBranch": "main",
+"primaryLanguage": "Python",
+"languages": ["Python", "TypeScript", "JavaScript", "HTML", "Shell"],
+"license": "Apache-2.0",
+"openSource": true,
+"archived": false,
+"fork": false,
+"mirror": false
+},
+"githubMetrics": {
+"stars": 26500,
+"forks": 2800,
+"watchers": 310,
+"contributors": 85,
+"openIssues": 45,
+"closedIssues": 520,
+"releases": 120,
+"latestVersion": "1.1.26",
+"latestReleaseDate": "2026-07-15T00:00:00Z",
+"commits": 1450,
+"branches": 12,
+"tags": 120,
+"repositorySize": 49152,
+"createdAt": "2024-04-12T00:00:00Z",
+"updatedAt": "2026-07-31T00:00:00Z",
+"lastCommitDate": "2026-07-30T00:00:00Z"
+},
+"popularity": {
+"githubRank": "Top 1%",
+"trending": true,
+"maintained": true,
+"activityLevel": "High",
+"popularityScore": 98
+},
+"problemsSolved": [
+"LLM Context Amnesia",
+"Token Overhead & Cost Inflation",
+"Context Window Bloat",
+"Memory Duplication",
+"Contradictory AI Facts",
+"Inconsistent User Preferences Across Sessions",
+"High First-Token Latency",
+"Lack of Cross-Platform Agent State Persistence"
+],
+"primaryBenefits": [
+"Reduces prompt context size by up to 90%",
+"Mutates and updates user facts dynamically over time",
+"Dramatically lowers API token expenditure",
+"Accelerates Time-To-First-Token (TTFT)",
+"Enables personalized AI experiences across sessions",
+"Provides multi-tenant partitioning for users, agents, and runs"
+],
+"keyFeatures": [
+"LLM-Driven Atomic Fact Extraction",
+"Dynamic Memory Conflict Resolution (Add/Update/Delete/None)",
+"Hybrid Vector and Knowledge Graph Memory Engine",
+"Multi-Tenant Partitioning (User, Agent, Run Scopes)",
+"Model Context Protocol (MCP) Server Integration",
+"Plug-and-Play Connectors for Vector DBs and LLMs",
+"Self-Hostable and Air-Gapped Local Execution Option",
+"Asynchronous Non-Blocking Engine for Real-Time Agents",
+"Built-In Custom Prompting for Domain-Specific Extraction",
+"GDPR-Compliant Full User Memory Purging API"
+],
+"useCases": [
+"AI Coding Assistants & IDE Agents",
+"Autonomous Multi-Agent Orchestration",
+"Personalized Customer Support Copilots",
+"Real-Time Voice Calling AI Agents",
+"Enterprise Knowledge Management",
+"Personal Productivity & Scheduling Assistants"
+],
+"supportedAiTools": [
+"Claude Code",
+"Cursor",
+"Codex",
+"Claude Desktop",
+"Gemini CLI",
+"Continue",
+"VS Code",
+"OpenCode",
+"Windsurf",
+"Roo Code"
+],
+"supportedFrameworks": [
+"LangChain",
+"LlamaIndex",
+"CrewAI",
+"AutoGen",
+"FastAPI",
+"OpenAI SDK",
+"ElizaOS",
+"Mastra",
+"Google ADK"
+],
+"supportedLanguages": [
+"Python",
+"TypeScript",
+"JavaScript"
+],
+"installation": {
+"packageManagers": ["pip", "npm", "pnpm", "yarn", "uvx"],
+"installationMethods": [
+"pip install mem0ai",
+"npm install mem0ai",
+"pip install mem0-cli",
+"npx mem0-mcp"
+],
+"docker": true,
+"cloud": true,
+"selfHosted": true
+},
+"interfaces": {
+"SDK": true,
+"CLI": true,
+"REST API": true,
+"GraphQL": false,
+"Web UI": true,
+"Desktop App": false,
+"Browser Extension": false,
+"MCP": true,
+"IDE Plugin": true
+},
+"integrations": [
+"Claude Code MCP",
+"Cursor MCP",
+"Zapier",
+"n8n",
+"Dify",
+"Pipecat",
+"Plivo",
+"Exotel"
+],
+"databases": [
+"SQLite",
+"Azure MySQL"
+],
+"vectorDatabases": [
+"Qdrant",
+"Pgvector",
+"Pinecone",
+"Chroma",
+"Milvus",
+"Redis",
+"Weaviate",
+"Azure AI Search",
+"Elasticsearch",
+"FAISS"
+],
+"embeddingProviders": [
+"OpenAI",
+"Anthropic",
+"AWS Bedrock",
+"Azure OpenAI",
+"Google AI",
+"HuggingFace",
+"FastEmbed",
+"Ollama",
+"Together AI"
+],
+"llmProviders": [
+"OpenAI",
+"Anthropic",
+"AWS Bedrock",
+"Azure OpenAI",
+"Groq",
+"DeepSeek",
+"Mistral AI",
+"Ollama",
+"xAI"
+],
+"deployment": {
+"cloud": true,
+"docker": true,
+"local": true,
+"kubernetes": true,
+"serverless": true,
+"selfHosted": true
+},
+"platforms": [
+"Linux",
+"Windows",
+"macOS",
+"Web"
+],
+"security": {
+"authentication": "API Key, OAuth2",
+"authorization": "Bearer Token / Scoped Tenant Keys",
+"encryption": "TLS/SSL, AES-256 at Rest",
+"secretsManagement": "Environment Variables",
+"RBAC": true,
+"auditLogs": true
+},
+"performance": {
+"caching": true,
+"streaming": true,
+"parallelProcessing": true,
+"gpuSupport": true,
+"asyncSupport": true,
+"rateLimiting": true
+},
+"aiCapabilities": {
+"memory": true,
+"RAG": true,
+"agents": true,
+"planning": false,
+"toolCalling": true,
+"vision": true,
+"audio": true,
+"reasoning": true,
+"workflows": true,
+"evaluation": true,
+"guardrails": true,
+"observability": true
+},
+"tokenOptimization": {
+"promptCompression": true,
+"memoryRetrieval": true,
+"caching": true,
+"semanticSearch": true,
+"contextFiltering": true,
+"contextRanking": true,
+"chunking": false,
+"summarization": true
+},
+"searchTags": [
+"mem0",
+"memory-layer",
+"ai-memory",
+"vector-database",
+"knowledge-graph",
+"rag-optimization",
+"token-reduction",
+"context-window",
+"mcp-server",
+"claude-code",
+"cursor-memory",
+"qdrant",
+"pgvector",
+"pinecone",
+"neo4j",
+"langchain-memory",
+"llamaindex-memory",
+"agent-memory",
+"long-term-memory",
+"personalized-ai",
+"llm-context",
+"openai",
+"anthropic",
+"ollama",
+"multi-agent-systems",
+"prompt-engineering",
+"ai-infrastructure",
+"semantic-search",
+"graph-memory",
+"docker-memory"
+],
+"badges": [
+"Apache 2.0",
+"26.5k Stars",
+"Python",
+"TypeScript",
+"MCP Enabled",
+"Production Ready",
+"Active"
+],
+"relatedTools": [
+{
+"name": "Graphiti",
+"slug": "graphiti",
+"description": "Temporal knowledge graph engine for long-term AI agent memory."
+},
+{
+"name": "Zep",
+"slug": "zep",
+"description": "Long-term memory service for AI assistants and chat applications."
+},
+{
+"name": "LLMLingua",
+"slug": "llmlingua",
+"description": "Prompt compression framework using compact language models."
+},
+{
+"name": "RepoMix",
+"slug": "repomix",
+"description": "Packs entire repositories into single AI-friendly context files."
+},
+{
+"name": "Context7",
+"slug": "context7",
+"description": "Context optimization and retrieval system for coding tools."
+}
+],
+"learningResources": {
+"documentation": "[https://docs.mem0.ai](https://docs.mem0.ai)",
+"examples": "[https://docs.mem0.ai/cookbooks/overview](https://docs.mem0.ai/cookbooks/overview)",
+"blog": "[https://mem0.ai/blog](https://mem0.ai/blog)",
+"discord": "[https://discord.gg/mem0](https://www.google.com/search?q=https://discord.gg/mem0)",
+"slack": null,
+"youTube": "[https://www.youtube.com/@mem0ai](https://www.google.com/search?q=https://www.youtube.com/%40mem0ai)",
+"researchPapers": null,
+"tutorials": "[https://docs.mem0.ai/quickstart](https://docs.mem0.ai/quickstart)"
+},
+"community": {
+"gitHubDiscussions": "[https://github.com/mem0ai/mem0/discussions](https://github.com/mem0ai/mem0/discussions)",
+"discord": "[https://discord.gg/mem0](https://www.google.com/search?q=https://discord.gg/mem0)",
+"slack": null,
+"reddit": "[https://www.reddit.com/r/mem0ai](https://www.google.com/search?q=https://www.reddit.com/r/mem0ai)",
+"x": "[https://x.com/mem0ai](https://x.com/mem0ai)",
+"linkedIn": "[https://www.linkedin.com/company/mem0ai](https://www.google.com/search?q=https://www.linkedin.com/company/mem0ai)"
+},
+"filesGenerated": [
+"README.md",
+"guide.html",
+"Guide.pdf",
+"workflow.mmd",
+"workflow.svg",
+"metadata.json"
+],
+"license": {
+"licenseName": "Apache License 2.0",
+"licenseIdentifier": "Apache-2.0",
+"licenseURL": "[https://github.com/mem0ai/mem0/blob/main/LICENSE](https://github.com/mem0ai/mem0/blob/main/LICENSE)"
+},
+"seo": {
+"metaTitle": "Mem0 - The Memory Layer for Personalized AI Applications & Agents",
+"metaDescription": "Mem0 is an open-source memory layer for LLMs that provides persistent, cross-session memory, reducing token costs and context bloat through intelligent fact extraction.",
+"keywords": [
+"Mem0",
+"AI Memory",
+"LLM Memory Layer",
+"MCP Server",
+"RAG Optimization",
+"Token Reduction",
+"Graph Memory",
+"Vector Memory"
+]
+},
+"ranking": {
+"difficulty": "Intermediate",
+"beginnerFriendly": true,
+"productionReady": true,
+"enterpriseReady": true,
+"documentationQuality": "Very High",
+"communityStrength": "High",
+"maintenanceScore": 95,
+"learningCurve": "Low"
+}
 }

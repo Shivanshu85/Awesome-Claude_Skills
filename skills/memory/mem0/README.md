@@ -1,64 +1,127 @@
-# Mem0 — The Memory Layer for Personalized AI
+<div align="center">
 
-[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](file:///skills/memory/mem0/LICENSE)
-[![GitHub Stars](https://img.shields.io/github/stars/mem0ai/mem0?style=social)](https://github.com/mem0ai/mem0)
-[![GitHub Forks](https://img.shields.io/github/forks/mem0ai/mem0?style=social)](https://github.com/mem0ai/mem0)
-[![PyPI version](https://img.shields.io/pypi/v/mem0ai?color=%2334D058&label=pypi%20package)](https://pypi.org/project/mem0ai)
-[![Npm package](https://img.shields.io/npm/v/mem0ai)](https://www.npmjs.com/package/mem0ai)
+# Mem0
 
-**Mem0** ("mem-zero") is an intelligent, multi-layer memory retention system that equips AI assistants, agents, and IDE extensions with continuous long-term memory across sessions, users, and projects.
+The Memory Layer for Personalized AI Applications, Autonomous Agents, and Enterprise LLM Workflows
+
+Provides an intelligent, self-improving memory layer that retains facts, user preferences, and cross-session context across LLM interactions.
+
+[Official Website](https://mem0.ai) • [Documentation](https://docs.mem0.ai) • [GitHub Repository](https://github.com/mem0ai/mem0)
+
+![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)
+![Category](https://img.shields.io/badge/Category-AI_Memory_Infrastructure-orange)
+![Language](https://img.shields.io/badge/Language-Python%20%7C%20TypeScript-blue)
+![Status](https://img.shields.io/badge/Status-Active-brightgreen)
+
+</div>
 
 ---
 
-## Project Snapshot
+## Overview
+
+**Mem0** ("Memory Zero") is an open-source memory orchestration engine designed to give Large Language Models (LLMs), AI coding assistants, and autonomous agents persistent, cross-session memory[cite: 1]. Standard LLM conversations are inherently stateless, requiring developers to either re-inject full chat logs—inflating token costs and latency—or rely on naive vector chunking, which fails to update changing user facts[cite: 1].
+
+Mem0 resolves this by dynamically extracting atomic facts from natural language conversations, deduplicating them against historic records, and maintaining a structured, hybrid vector-graph store[cite: 1]. When users update their preferences or state over time, Mem0 automatically mutates existing memories rather than appending duplicate or contradictory vectors[cite: 1].
+
+Designed for AI application developers, agent engineers, and developer tool creators, Mem0 provides a scalable memory infrastructure that reduces prompt context overhead, lowers API token costs, and delivers hyper-personalized AI responses[cite: 1].
+
+---
+
+## Repository Information
 
 | Property | Details |
 | :--- | :--- |
-| **Category** | [Memory Systems](file:///skills/memory/README.md) |
-| **Primary Language** | Python (SDK), TypeScript/Node.js (SDK), Rust / CLI |
-| **License** | Apache License 2.0 |
-| **GitHub Stars** | ⭐ 30k+ |
-| **GitHub Forks** | 🍴 2.8k+ |
-| **Contributors** | 100+ open-source contributors |
-| **Maintenance Status** | ✅ Active (Supported by Y Combinator S24) |
-| **Official Repository** | [github.com/mem0ai/mem0](https://github.com/mem0ai/mem0) |
-| **Official Documentation** | [docs.mem0.ai](https://docs.mem0.ai) |
+| **Category** | AI Memory Infrastructure & Context Optimization |
+| **Subcategory** | Vector-Graph Hybrid Store / LLM Orchestration Layer |
+| **License** | Apache 2.0 License |
+| **Primary Languages** | Python, TypeScript |
+| **Repository** | [github.com/mem0ai/mem0](https://github.com/mem0ai/mem0) |
+| **Documentation** | [docs.mem0.ai](https://docs.mem0.ai) |
 | **Official Website** | [mem0.ai](https://mem0.ai) |
+| **Latest Release** | v1.1.26 |
+| **Open Source** | Yes |
+| **Status** | Production Ready |
+| **Maintainer** | Mem0 Core Team & Community |
+
+---
+
+## GitHub Statistics
+
+| Metric | Value |
+| :--- | :--- |
+| **⭐ Stars** | 26,500+ |
+| **🍴 Forks** | 2,800+ |
+| **👀 Watchers** | 310+ |
+| **📦 Releases** | 120+ |
+| **🐞 Open Issues** | 45 |
+| **👥 Contributors** | 85+ |
+| **📅 Last Commit** | July 2026 |
+| **Repository Size** | ~48 MB |
+
+---
+
+## Why Developers Use It
+
+* **Drastic Cost & Token Reduction:** Cuts prompt payload size by up to 90% by replacing raw message logs with compressed atomic facts[cite: 1].
+* **Cross-Session Persistence:** Maintains user preferences, coding habits, and project architectural choices indefinitely across sessions[cite: 1].
+* **Multi-Tenant Partitioning:** Built-in isolation for `user_id`, `agent_id`, and `run_id` scope configurations[cite: 1].
+* **Model Context Protocol (MCP) Support:** Connects directly to AI coding tools like Claude Code, Cursor, and Windsurf[cite: 1].
+* **Self-Hostable & Air-Gapped:** Can be run 100% locally with Ollama and local Qdrant/Chroma databases for complete data privacy[cite: 1].
 
 ---
 
 ## Problems Solved
 
-- **Stateless AI Chat Sessions**: Standard LLM calls reset history on every prompt, forcing developers to repeatedly paste context, code standards, and project preferences.
-- **Context Window Inflation & High API Costs**: Appending full conversation transcripts balloon token usage, driving up API invoices and slowing response times.
-- **Loss of Cross-Session Entity Relationships**: Basic vector RAG fails to link entities, user choices, and historical decisions over time.
+* **LLM Amnesia:** Prevents AI tools from forgetting user preferences and decisions between chat sessions[cite: 1].
+* **Context Window Bloat:** Stops exponential token usage caused by stuffing full chat histories into prompts[cite: 1].
+* **Contradictory Memories:** Automatically updates or deletes outdated facts when user state changes[cite: 1].
+* **High Inference Latency:** Accelerates Time-To-First-Token (TTFT) by reducing prompt payload lengths[cite: 1].
+* **Memory Duplication:** Consolidates redundant conversational facts into clean atomic entries[cite: 1].
 
 ---
 
 ## Key Features
 
-- **Multi-Level Memory Scope**: Seamlessly tracks memory across three distinct scopes: **User**, **Session**, and **Agent**.
-- **Single-Pass ADD-Only Extraction**: Accumulates memories safely without destructive overwrites.
-- **Multi-Signal Parallel Retrieval**: Combines semantic embeddings, BM25 keyword matching, and entity linking for hybrid search.
-- **Temporal Reasoning**: Time-aware ranking accurately resolves queries about current state, past events, and future schedules.
-- **Cross-Platform SDKs & CLI**: Native support for Python (`mem0ai`), Node.js (`mem0ai`), and instant CLI integration (`@mem0/cli`).
+* **LLM-Driven Fact Extraction:** Automatically parses natural language to extract key preferences, traits, and facts[cite: 1].
+* **Dynamic Memory Mutation:** Executes `ADD`, `UPDATE`, `DELETE`, or `NONE` operations during ingestion based on historical context[cite: 1].
+* **Hybrid Vector-Graph Architecture:** Combines dense embeddings with Neo4j/Neptune relational knowledge graphs[cite: 1].
+* **Plug-and-Play Connectors:** Supports Qdrant, Pgvector, Pinecone, Milvus, Chroma, Weaviate, OpenAI, Anthropic, and Groq[cite: 1].
+* **Multi-Language SDKs:** Native Python SDK, Node.js/TypeScript client, REST API, and CLI binary[cite: 1].
 
 ---
 
 ## Best Use Cases
 
-1. **Personalized AI Coding Assistants**: Train IDE assistants (Claude Code, Cursor, Windsurf) to remember coding standards, local dev setups, and past bug resolutions.
-2. **Autonomous Developer Agents**: Provide agent swarms with shared, persistent memory across multi-step execution loops.
-3. **Customer Support Bots**: Retain customer interaction history, past support tickets, and individual preferences.
-4. **Adaptive Productivity Environments**: Build workflows that automatically adjust to developer habits over time.
+* **AI Coding Assistants:** Retain project architecture choices, library preferences, and local environment quirks across IDE restarts[cite: 1].
+* **Autonomous AI Agents:** Provide long-term episodic and semantic memory for multi-agent workflows[cite: 1].
+* **Personalized Support Copilots:** Remember user account history, past tickets, and technical proficiency[cite: 1].
+* **Voice Calling AI Agents:** Ultra-fast context injection for low-latency voice pipelines[cite: 1].
 
 ---
 
-## Supported Integrations
+## Compatibility
 
-- **LLM Providers**: OpenAI, Anthropic Claude, Google Gemini, Ollama, Groq, Cohere.
-- **Vector Stores**: Qdrant, Milvus, Pinecone, PGVector, Chroma, Weaviate.
-- **Agent Frameworks**: LangChain, LlamaIndex, CrewAI, AutoGen.
+| AI Tool / Framework | Support Status | Integration Type |
+| :--- | :---: | :--- |
+| **Claude Code** | ✅ | Native MCP Server (`mem0-mcp`) |
+| **Cursor** | ✅ | MCP Server / Python-Node Extension |
+| **Codex** | ✅ | Open-source CLI / MCP Gateway |
+| **Gemini CLI** | ✅ | Python SDK / REST Interface |
+| **Continue** | ✅ | Custom Context Provider / MCP |
+| **OpenCode** | ✅ | Native Plugin / MCP |
+| **VS Code** | ✅ | Extension / MCP Server |
+| **Windsurf** | ✅ | MCP Server |
+| **Roo Code** | ✅ | MCP Server |
+
+---
+
+## Technology Stack
+
+* **Core SDK:** Python 3.10+, TypeScript / ES2022
+* **APIs & Protocols:** REST, Model Context Protocol (MCP), AsyncIO
+* **Vector Store Drivers:** Qdrant, Pgvector, Pinecone, Chroma, Milvus, Redis, Weaviate
+* **Graph Database Drivers:** Neo4j, AWS Neptune Analytics
+* **LLM Adapters:** OpenAI, Anthropic, AWS Bedrock, Azure OpenAI, Google Vertex, Ollama
 
 ---
 
@@ -67,55 +130,3 @@
 ### Python SDK
 ```bash
 pip install mem0ai
-```
-
-### Node.js / TypeScript SDK
-```bash
-npm install mem0ai
-```
-
-### CLI Agent Setup
-```bash
-npm install -g @mem0/cli
-mem0 init --agent --agent-caller claude-code
-```
-
----
-
-## Quick Start Example (Python)
-
-```python
-from mem0 import Memory
-
-# 1. Initialize Memory Client
-m = Memory()
-
-# 2. Add memories for a user or coding session
-m.add(
-    "User prefers TypeScript with strict mode and uses Tailwind CSS",
-    user_id="dev_user_101"
-)
-
-# 3. Search relevant memory context
-relevant_memories = m.search(
-    query="What styling library does the user prefer?",
-    user_id="dev_user_101"
-)
-
-print(relevant_memories)
-```
-
----
-
-## Detailed Documentation & Interactive Guide
-
-For comprehensive architecture diagrams, advanced configuration, vector store bindings, benchmark metrics, and head-to-head comparisons, view the complete **[Mem0 Technical Guide (guide.html)](file:///skills/memory/mem0/guide.html)**.
-
----
-
-## Official Resources
-
-- 📦 **GitHub Repository**: [github.com/mem0ai/mem0](https://github.com/mem0ai/mem0)
-- 📖 **Official Documentation**: [docs.mem0.ai](https://docs.mem0.ai)
-- 🌐 **Official Website**: [mem0.ai](https://mem0.ai)
-- 📄 **Research Benchmarks**: [mem0.ai/research](https://mem0.ai/research)
