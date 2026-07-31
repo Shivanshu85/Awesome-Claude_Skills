@@ -116,7 +116,8 @@ Find the appropriate category based on your immediate engineering bottleneck:
 Awesome-Claude_Skills/
 │
 ├── README.md                          <- Root Landing Page & Central Index
-├── LICENSE                            <- Dual Licensing Guide (CC BY 4.0 + MIT)
+├── LICENSE                            <- Creative Commons Attribution 4.0 International (CC BY 4.0)
+├── MIT.txt                            <- MIT License for Schemas, Templates & Tooling
 ├── CONTRIBUTING.md                    <- Contributor Manual & Review Workflow
 ├── CODE_OF_CONDUCT.md                 <- Community Guidelines (Contributor Covenant v2.1)
 ├── SECURITY.md                        <- Security & Disclosure Policy
@@ -128,10 +129,6 @@ Awesome-Claude_Skills/
 │   └── ISSUE_TEMPLATE/
 │       ├── new_tool_request.yml
 │       └── tool_update.yml
-│
-├── LICENSES/
-│   ├── CC-BY-4.0.txt
-│   └── MIT.txt
 │
 ├── assets/
 │   └── Banner.webp
@@ -245,7 +242,7 @@ A: Review [CONTRIBUTING.md](CONTRIBUTING.md), copy the templates in `templates/`
 
 This repository uses a dual licensing model:
 
-- **Documentation & Content**: Licensed under [Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSES/CC-BY-4.0.txt).
-- **Schemas, Templates & Tooling**: Licensed under the [MIT License](LICENSES/MIT.txt).
+- **Documentation & Content**: Licensed under [Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE).
+- **Schemas, Templates & Tooling**: Licensed under the [MIT License](MIT.txt).
 
 See [LICENSE](LICENSE) for full licensing boundaries.
