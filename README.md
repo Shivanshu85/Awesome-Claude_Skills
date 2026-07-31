@@ -12,7 +12,6 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/Tools_License-MIT-yellow.svg" alt="License: MIT"></a>
   <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a>
   <a href="schemas/metadata.schema.json"><img src="https://img.shields.io/badge/Schema-Draft_07-informational.svg" alt="Schema Version"></a>
-  <a href="docs/standards.md"><img src="https://img.shields.io/badge/Standard-v1.0-purple.svg" alt="Documentation Standard"></a>
 </p>
 
 ---
@@ -117,41 +116,38 @@ Awesome-Claude_Skills/
 ├── README.md                          <- Root Landing Page & Central Documentation Hub
 ├── LICENSE                            <- Documentation License (CC BY 4.0)
 ├── MIT.txt                            <- Tooling, Templates & Schemas License (MIT)
-├── CONTRIBUTING.md                    <- Contributor Guide & Submission Workflow
+├── CONTRIBUTING.md                    <- Contributor Guide & Submission Manual
 ├── CODE_OF_CONDUCT.md                 <- Community Covenant Code of Conduct (v2.1)
 ├── SECURITY.md                        <- Security Policy & Vulnerability Disclosure
-├── CHANGELOG.md                       <- Release History & Architectural Decison Log
+├── CHANGELOG.md                       <- Release History & Architectural Decision Log
 ├── .gitignore                         <- Comprehensive Exclusion Rules
 │
 ├── .github/
 │   ├── PULL_REQUEST_TEMPLATE.md       <- PR Review Checklist
 │   └── ISSUE_TEMPLATE/
+│       ├── new_skill_request.yml      <- Structured Skill Request Form
 │       ├── new_tool_request.yml       <- Structured Tool Request Form
+│       ├── skill_update.yml           <- Skill Metadata Update Form
 │       └── tool_update.yml            <- Tool Metadata Update Form
 │
 ├── assets/
 │   └── Banner.webp                    <- High-Resolution Banner Image
-│
-├── docs/
-│   ├── taxonomy.md                    <- Canonical 13-Category Domain Taxonomy
-│   ├── glossary.md                    <- AI Context & Optimization Glossary
-│   └── standards.md                   <- Documentation Standards & Quality Metrics
 │
 ├── schemas/
 │   └── metadata.schema.json           <- Machine-Readable Draft-07 JSON Schema
 │
 ├── templates/
 │   ├── README.template.md             <- Standardized 28-Section Tool README Template
-│   ├── metadata.template.json         <- JSON Metadata Starter Template
-│   └── workflow.template.mmd          <- Mermaid Architecture Diagram Template
+│   └── metadata.template.json         <- Machine-Readable Metadata Starter Template
 │
 └── skills/                            <- 13 Canonical Domain Category Directories
     ├── memory/                        <- Memory Systems & Persistent State Retention
+    │   ├── README.md                  <- Category Overview & Tool Index
     │   └── mem0/                      <- Mem0 Complete Documentation Package
     │       ├── README.md              <- Overview, Statistics & SDK Quickstart
     │       ├── guide.html             <- Interactive Technical & Architecture Guide
     │       ├── metadata.json          <- Machine-Readable Tool Metadata
-    │       └── LICENSE                <- Apache-2.0 License File
+    │       └── LICENSE                <- Apache-2.0 Open-Source License
     ├── context/                       <- Context Window Assembly & Token Packing
     ├── context-compression/           <- Prompt & Context Compression Algorithms
     ├── token-optimization/            <- Token Economy & API Cost Reduction
@@ -168,12 +164,11 @@ Awesome-Claude_Skills/
 
 ### Directory Responsibilities
 
-- **`skills/`**: The core documentation library, containing standardized documentation packages organized across 13 canonical domain categories.
-- **`docs/`**: Core repository knowledge infrastructure, providing authoritative specifications for category taxonomy, technical glossary definitions, and quality standards.
-- **`templates/`**: Production-ready starter templates (`README.template.md`, `metadata.template.json`, `workflow.template.mmd`) enforced for all tool contributions.
+- **`skills/`**: The core knowledge repository containing standardized documentation packages organized across 13 canonical domain categories.
+- **`templates/`**: Production-ready starter templates (`README.template.md`, `metadata.template.json`) enforced for all tool contributions.
 - **`schemas/`**: Formal Draft-07 JSON Schema (`metadata.schema.json`) enabling automated validation, machine indexing, and programmatic querying by AI coding agents.
-- **`assets/`**: High-resolution visual branding assets, architectural diagrams, and repository banners.
-- **`.github/`**: Automation workflows, issue templates (`new_tool_request.yml`, `tool_update.yml`), and pull request submission guidelines.
+- **`assets/`**: High-resolution visual branding assets and repository banners (`Banner.webp`).
+- **`.github/`**: Contribution workflow templates (`PULL_REQUEST_TEMPLATE.md`) and issue forms (`new_skill_request.yml`, `new_tool_request.yml`, `skill_update.yml`, `tool_update.yml`).
 
 ### Individual Tool Specifications
 
@@ -191,7 +186,7 @@ skills/<category>/<tool-slug>/
 - **`README.md`**: Provides immediate 30-second developer discovery, project statistics, problems solved, compatibility matrix, and installation options.
 - **`guide.html`**: Delivers a full, responsive interactive technical manual featuring SVG architecture diagrams, multi-language SDK examples, vector store configuration tables, and troubleshooting steps.
 - **`metadata.json`**: Enables instant parsing of tool properties (category, license, subcategory, primary languages, repository stats) by AI agents and indexers.
-- **`LICENSE`**: Preserves exact upstream license compliance for every documented tool.
+- **`LICENSE`**: Preserves exact upstream open-source license compliance for every documented tool.
 
 Category-level summaries, tool comparisons, star counts, and learning pathways are maintained inside each category's [`README.md`](skills/memory/README.md) file.
 
