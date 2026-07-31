@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mem0 Technical Guide — The Memory Layer for Personalized AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.15);
+      --accent-hover: #0284c7;
+      --border-color: #334155;
+      --code-bg: #090d16;
+      --badge-bg: #0284c7;
+      --success: #22c55e;
+      --warning: #f59e0b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+      border-bottom: 1px solid var(--border-color);
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 2.75rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: #ffffff;
+      margin-bottom: 0.75rem;
+    }
+
+    .header p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 800px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .badges-row {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .badge {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--accent);
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 2.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        display: none;
+      }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 2rem;
+      height: fit-content;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+    }
+
+    .sidebar h3 {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .sidebar nav ul {
+      list-style: none;
+    }
+
+    .sidebar nav ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar nav ul li a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.925rem;
+      transition: color 0.2s;
+      display: block;
+      padding: 0.35rem 0.5rem;
+      border-radius: 0.375rem;
+    }
+
+    .sidebar nav ul li a:hover {
+      color: var(--accent);
+      background-color: var(--accent-glow);
+    }
+
+    .content-body section {
+      margin-bottom: 3.5rem;
+      scroll-margin-top: 2rem;
+    }
+
+    .content-body h2 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.25rem;
+      color: #ffffff;
+    }
+
+    .content-body h3 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.75rem;
+      color: var(--accent);
+    }
+
+    .content-body p {
+      margin-bottom: 1rem;
+      color: #cbd5e1;
+    }
+
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+    }
+
+    .card h4 {
+      font-size: 1.1rem;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.925rem;
+      margin: 0;
+    }
+
+    pre {
+      background-color: var(--code-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 1.25rem;
+      overflow-x: auto;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.9rem;
+      color: #e2e8f0;
+      margin: 1rem 0;
+    }
+
+    code {
+      font-family: 'Fira Code', monospace;
+      background: rgba(255,255,255,0.08);
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.25rem;
+      font-size: 0.875rem;
+      color: var(--accent);
+    }
+
+    pre code {
+      background: transparent;
+      padding: 0;
+      color: inherit;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: var(--bg-card);
+      border-radius: 0.5rem;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    th, td {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      background-color: #0f172a;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    td {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .diagram-box {
+      background: var(--code-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+
+    .diagram-box svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .alert {
+      padding: 1rem 1.25rem;
+      border-radius: 0.5rem;
+      margin: 1rem 0;
+      font-size: 0.925rem;
+      border-left: 4px solid var(--accent);
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    .alert.success {
+      border-left-color: var(--success);
+      background: rgba(34, 197, 94, 0.08);
+    }
+
+    .alert.warning {
+      border-left-color: var(--warning);
+      background: rgba(245, 158, 11, 0.08);
+    }
+
+    .footer {
+      border-top: 1px solid var(--border-color);
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      margin-top: 4rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="badges-row">
+      <span class="badge">Apache 2.0 License</span>
+      <span class="badge">⭐ 30k+ Stars</span>
+      <span class="badge">Y Combinator S24</span>
+    </div>
+    <h1>Mem0 — The Memory Layer for Personalized AI</h1>
+    <p>Comprehensive technical documentation for integrating continuous user, session, and agent memory into AI coding assistants and autonomous workflows.</p>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <h3>Navigation</h3>
+      <nav>
+        <ul>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#architecture">Architecture</a></li>
+          <li><a href="#features">Core Features</a></li>
+          <li><a href="#installation">Installation</a></li>
+          <li><a href="#configuration">Configuration</a></li>
+          <li><a href="#code-examples">Code Examples</a></li>
+          <li><a href="#comparisons">Comparisons</a></li>
+          <li><a href="#best-practices">Best Practices</a></li>
+          <li><a href="#troubleshooting">Troubleshooting</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="content-body">
+
+      <section id="overview">
+        <h2>Overview</h2>
+        <p><strong>Mem0</strong> ("mem-zero") provides a self-improving memory layer for LLM applications and AI coding assistants. Unlike basic chat history buffers that dump full conversation transcripts into the prompt window, Mem0 extracts facts, entity relationships, and user preferences into a structured, queryable memory graph.</p>
+        
+        <div class="grid-cards">
+          <div class="card">
+            <h4>Multi-Layer Scope</h4>
+            <p>Partition memory seamlessly across User, Session, and Agent scopes for granular retrieval.</p>
+          </div>
+          <div class="card">
+            <h4>Hybrid Parallel Search</h4>
+            <p>Combines vector embeddings, BM25 keyword match, and entity linking for high-precision recall.</p>
+          </div>
+          <div class="card">
+            <h4>Temporal Reasoning</h4>
+            <p>Time-aware scoring accurately handles queries about past choices, current state, and future plans.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="architecture">
+        <h2>Architecture & Workflow</h2>
+        <p>Mem0 operates as an intermediate memory controller sitting between the application prompt loop and vector/graph storage layers.</p>
+
+        <div class="diagram-box">
+          <svg viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="110" width="140" height="60" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+            <text x="90" y="145" fill="#ffffff" font-family="Inter" font-size="14" text-anchor="middle" font-weight="600">User / Agent Prompt</text>
+
+            <path d="M 160 140 L 220 140" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+
+            <rect x="220" y="80" width="180" height="120" rx="8" fill="#0f172a" stroke="#0284c7" stroke-width="2"/>
+            <text x="310" y="115" fill="#38bdf8" font-family="Inter" font-size="15" text-anchor="middle" font-weight="700">Mem0 Memory Engine</text>
+            <text x="310" y="140" fill="#94a3b8" font-family="Inter" font-size="12" text-anchor="middle">• Single-Pass Fact Extraction</text>
+            <text x="310" y="160" fill="#94a3b8" font-family="Inter" font-size="12" text-anchor="middle">• Entity Graph Linking</text>
+
+            <path d="M 400 140 L 460 140" stroke="#38bdf8" stroke-width="2"/>
+
+            <rect x="460" y="40" width="140" height="50" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+            <text x="530" y="70" fill="#ffffff" font-family="Inter" font-size="13" text-anchor="middle">Vector Embeddings</text>
+
+            <rect x="460" y="115" width="140" height="50" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+            <text x="530" y="145" fill="#ffffff" font-family="Inter" font-size="13" text-anchor="middle">BM25 Keywords</text>
+
+            <rect x="460" y="190" width="140" height="50" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+            <text x="530" y="220" fill="#ffffff" font-family="Inter" font-size="13" text-anchor="middle">Entity Graph</text>
+
+            <path d="M 600 140 L 660 140" stroke="#38bdf8" stroke-width="2"/>
+
+            <rect x="660" y="110" width="120" height="60" rx="8" fill="#1e293b" stroke="#22c55e" stroke-width="2"/>
+            <text x="720" y="145" fill="#ffffff" font-family="Inter" font-size="14" text-anchor="middle" font-weight="600">LLM Prompt</text>
+          </svg>
+        </div>
+      </section>
+
+      <section id="installation">
+        <h2>Installation</h2>
+        
+        <h3>Python SDK</h3>
+        <pre><code>pip install mem0ai</code></pre>
+
+        <h3>Node.js / TypeScript SDK</h3>
+        <pre><code>npm install mem0ai</code></pre>
+
+        <h3>Global CLI Agent Tool</h3>
+        <pre><code>npm install -g @mem0/cli
+mem0 init --agent --agent-caller claude-code</code></pre>
+      </section>
+
+      <section id="configuration">
+        <h2>Configuration Options</h2>
+        <p>Mem0 supports custom configuration for vector databases (Qdrant, Pinecone, Milvus, PGVector), LLM models (OpenAI, Anthropic, Gemini, Ollama), and embedding providers.</p>
+
+        <pre><code>config = {
+    "vector_store": {
+        "provider": "qdrant",
+        "config": {
+            "host": "localhost",
+            "port": 6333,
+        }
+    },
+    "llm": {
+        "provider": "openai",
+        "config": {
+            "model": "gpt-4o",
+            "temperature": 0.0
+        }
+    },
+    "embedder": {
+        "provider": "openai",
+        "config": {
+            "model": "text-embedding-3-small"
+        }
+    }
+}</code></pre>
+      </section>
+
+      <section id="code-examples">
+        <h2>Code Examples</h2>
+
+        <h3>Python Basic Example</h3>
+        <pre><code>from mem0 import Memory
+
+# 1. Initialize Memory Client
+m = Memory()
+
+# 2. Add memories for a user or coding session
+m.add(
+    "User prefers TypeScript with strict mode and uses Tailwind CSS",
+    user_id="dev_user_101"
+)
+
+# 3. Search relevant memory context
+relevant = m.search(
+    query="What styling library does the user prefer?",
+    user_id="dev_user_101"
+)
+
+print(relevant)</code></pre>
+
+        <h3>Node.js / TypeScript Example</h3>
+        <pre><code>import { Memory } from "mem0ai";
+
+const memory = new Memory();
+
+async function run() {
+  await memory.add([
+    { role: "user", content: "I am building a React project using Vite and Vitest." }
+  ], { userId: "dev_user_101" });
+
+  const result = await memory.search("What testing tool is being used?", {
+    userId: "dev_user_101"
+  });
+
+  console.log(result);
+}
+
+run();</code></pre>
+      </section>
+
+      <section id="comparisons">
+        <h2>Head-to-Head Comparisons</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Mem0</th>
+              <th>Naive Vector RAG</th>
+              <th>LangChain ConversationBuffer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Token Efficiency</strong></td>
+              <td><span style="color: var(--success)">High (Selective Recall)</span></td>
+              <td>Medium (Chunky Snippets)</td>
+              <td><span style="color: #ef4444">Low (Full Transcript Dump)</span></td>
+            </tr>
+            <tr>
+              <td><strong>Cross-Session Memory</strong></td>
+              <td><span style="color: var(--success)">Native User/Session/Agent</span></td>
+              <td>Manual Vector Querying</td>
+              <td><span style="color: #ef4444">None (Session Reset)</span></td>
+            </tr>
+            <tr>
+              <td><strong>Entity Graph Linking</strong></td>
+              <td><span style="color: var(--success)">Automated</span></td>
+              <td>None</td>
+              <td>None</td>
+            </tr>
+            <tr>
+              <td><strong>Temporal Awareness</strong></td>
+              <td><span style="color: var(--success)">Time-Scored Ranking</span></td>
+              <td>Similarity Only</td>
+              <td>Linear Chronological</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="best-practices">
+        <h2>Best Practices & Recommendations</h2>
+        <div class="alert success">
+          <strong>Recommended:</strong> Always provide explicit <code>user_id</code> or <code>agent_id</code> scope flags when storing memory to ensure isolation between multi-tenant users or coding tasks.
+        </div>
+
+        <div class="alert warning">
+          <strong>Anti-Pattern:</strong> Avoid storing secrets, API keys, or raw JWT tokens inside memory instances. Always sanitize inputs before calling <code>memory.add()</code>.
+        </div>
+      </section>
+
+      <section id="troubleshooting">
+        <h2>Troubleshooting & FAQ</h2>
+        
+        <h3>Q: How does Mem0 prevent memory degradation over time?</h3>
+        <p>Mem0 uses single-pass fact extraction and entity linking. Rather than performing destructive updates on existing records, new memories accumulate with temporal timestamps, and multi-signal scoring ranks recent relevant memories first.</p>
+
+        <h3>Q: Can Mem0 run completely offline locally?</h3>
+        <p>Yes. Mem0 supports local vector stores like Qdrant/Chroma and local LLMs via Ollama for air-gapped environments.</p>
+      </section>
+
+    </main>
+  </div>
+
+  <footer class="footer">
+    <p>Documentation curated for <a href="../../../README.md" style="color: var(--accent);">Awesome-Claude_Skills</a>. Source material under Apache License 2.0 from <a href="https://github.com/mem0ai/mem0" style="color: var(--accent);">mem0ai/mem0</a>.</p>
+  </footer>
+
+</body>
+</html>

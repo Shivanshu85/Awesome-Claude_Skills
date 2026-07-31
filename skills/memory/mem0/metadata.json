@@ -1,0 +1,33 @@
+{
+  "name": "Mem0",
+  "slug": "mem0",
+  "category": "memory",
+  "subCategory": "Agent Memory System",
+  "description": "The Memory Layer for Personalized AI: intelligent, multi-layer memory retention across users, sessions, and agents.",
+  "problemSolved": "Stateless LLM interactions, loss of past context and preferences across sessions, and context window inflation caused by repeating transcript histories.",
+  "supports": [
+    "Python",
+    "TypeScript",
+    "Node.js",
+    "CLI",
+    "Claude Code",
+    "Cursor",
+    "LangChain",
+    "LlamaIndex",
+    "CrewAI",
+    "AutoGen"
+  ],
+  "primaryLanguage": "Python",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/mem0ai/mem0",
+  "documentation": "https://docs.mem0.ai",
+  "website": "https://mem0.ai",
+  "tags": [
+    "memory",
+    "rag",
+    "knowledge-graph",
+    "agent-state",
+    "personalization",
+    "llm-memory"
+  ]
+}

@@ -48,7 +48,7 @@ Below are the open-source memory tools documented in this category:
 
 | Tool Name | Primary Focus | Status | Tool Guide |
 | :--- | :--- | :--- | :--- |
-| **Mem0** | Universal memory layer for AI agents & coding assistants | ✅ Active | *[View Guide](file:///skills/memory/README.md)* |
+| **[Mem0](file:///skills/memory/mem0/README.md)** | Universal memory layer for AI agents & coding assistants | ✅ Active | *[View Guide](file:///skills/memory/mem0/guide.html)* |
 | **Graphiti** | Temporal knowledge graph memory engine | ✅ Active | *[View Guide](file:///skills/memory/README.md)* |
 | **OpenMemory** | Local vector memory engine for session state retention | ✅ Active | *[View Guide](file:///skills/memory/README.md)* |
 

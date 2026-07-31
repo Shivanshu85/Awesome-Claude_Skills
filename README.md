@@ -183,8 +183,6 @@ skills/<category>/<tool-slug>/
 │
 ├── README.md              <- Authoritative 28-section documentation
 ├── metadata.json          <- Machine-readable metadata schema
-├── workflow.mmd           <- Source Mermaid diagram
-├── workflow.svg           <- Rendered vector SVG diagram
 └── LICENSE                <- Skill-level license file
 ```
 
