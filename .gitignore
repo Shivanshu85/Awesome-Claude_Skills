@@ -18,7 +18,7 @@ desktop.ini
 *~
 .project
 .settings/
-
+.agents/
 # Node.js & Tooling
 node_modules/
 npm-debug.log*
@@ -55,3 +55,4 @@ assets/*.png.tmp
 .env.development.local
 .env.test.local
 .env.production.local
+
